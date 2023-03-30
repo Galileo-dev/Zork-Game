@@ -1,5 +1,5 @@
-#ifndef ZORKUL_H_
-#define ZORKUL_H_
+#ifndef Game_H_
+#define Game_H_
 
 #include "Command.h"
 #include "Parser.h"
@@ -9,7 +9,7 @@
 #include <string>
 using namespace std;
 
-class ZorkUL {
+class Game {
 private:
 	Parser parser;
 	Room *currentRoom;
@@ -22,9 +22,9 @@ private:
     void displayItems();
 
 public:
-	ZorkUL();
+	Game();
 	void play();
 	string go(string direction);
 };
 
-#endif /*ZORKUL_H_*/
+#endif /*Game_H_*/

@@ -9,10 +9,11 @@ install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
 _deps
-
 /build
-vcpkg_installed
-.qt
 
+vcpkg_installed
+
+.qt
 zork_game_autogen
+
 .DS_Store
