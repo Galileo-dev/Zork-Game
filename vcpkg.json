@@ -1,0 +1,8 @@
+{
+    "name": "zork-game",
+    "dependencies": [
+        {
+            "name": "qt5-base"
+        }
+    ]
+}
