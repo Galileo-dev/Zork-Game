@@ -3,25 +3,28 @@
 using namespace std;
 #include "Game.h"
 
-int main(int argc, char*argv[]) {
+int main(int argc, char *argv[])
+{
 	Game game;
 	game.play();
 	return 0;
 }
 
-Game::Game() {
+Game::Game()
+{
 	createRooms();
 }
 
-void Game::createRooms()  {
+void Game::createRooms()
+{
 	Room *a, *b, *c, *d, *e, *f, *g, *h, *i;
 
 	a = new Room("a");
-        a->addItem(new Item("x", 1, 11));
-        a->addItem(new Item("y", 2, 22));
+	a->addItem(new Item("x", 1, 11));
+	a->addItem(new Item("y", 2, 22));
 	b = new Room("b");
-        b->addItem(new Item("xx", 3, 33));
-        b->addItem(new Item("yy", 4, 44));
+	b->addItem(new Item("xx", 3, 33));
+	b->addItem(new Item("yy", 4, 44));
 	c = new Room("c");
 	d = new Room("d");
 	e = new Room("e");
@@ -30,7 +33,7 @@ void Game::createRooms()  {
 	h = new Room("h");
 	i = new Room("i");
 
-//             (N, E, S, W)
+	//             (N, E, S, W)
 	a->setExits(f, b, d, c);
 	b->setExits(NULL, NULL, NULL, a);
 	c->setExits(NULL, a, NULL, NULL);
@@ -39,24 +42,26 @@ void Game::createRooms()  {
 	f->setExits(NULL, g, a, h);
 	g->setExits(NULL, NULL, NULL, f);
 	h->setExits(NULL, f, NULL, NULL);
-    i->setExits(NULL, d, NULL, NULL);
+	i->setExits(NULL, d, NULL, NULL);
 
-        currentRoom = a;
+	currentRoom = a;
 }
 
 /**
  *  Main play routine.  Loops until end of play.
  */
-void Game::play() {
+void Game::play()
+{
 	printWelcome();
 
 	// Enter the main command loop.  Here we repeatedly read commands and
 	// execute them until the Game game is over.
 
 	bool finished = false;
-	while (!finished) {
+	while (!finished)
+	{
 		// Create pointer to command and give it a command.
-		Command* command = parser.getCommand();
+		Command *command = parser.getCommand();
 		// Pass dereferenced command and check for end of game.
 		finished = processCommand(*command);
 		// Free the memory allocated by "parser.getCommand()"
@@ -67,9 +72,10 @@ void Game::play() {
 	cout << "end" << endl;
 }
 
-void Game::printWelcome() {
-	cout << "start"<< endl;
-	cout << "info for help"<< endl;
+void Game::printWelcome()
+{
+	cout << "start" << endl;
+	cout << "info for help" << endl;
 	cout << endl;
 	cout << currentRoom->longDescription() << endl;
 }
@@ -79,9 +85,11 @@ void Game::printWelcome() {
  * If this command ends the Game game, true is returned, otherwise false is
  * returned.
  */
-bool Game::processCommand(Command command) {
-	if (command.isUnknown()) {
-		cout << "invalid input"<< endl;
+bool Game::processCommand(Command command)
+{
+	if (command.isUnknown())
+	{
+		cout << "invalid input" << endl;
 		return false;
 	}
 
@@ -90,95 +98,100 @@ bool Game::processCommand(Command command) {
 		printHelp();
 
 	else if (commandWord.compare("map") == 0)
-		{
-        cout << "[h] --- [f] --- [g]" << endl;
+	{
+		cout << "[h] --- [f] --- [g]" << endl;
 		cout << "         |         " << endl;
-        cout << "         |         " << endl;
+		cout << "         |         " << endl;
 		cout << "[c] --- [a] --- [b]" << endl;
 		cout << "         |         " << endl;
 		cout << "         |         " << endl;
 		cout << "[i] --- [d] --- [e]" << endl;
-		}
+	}
 
 	else if (commandWord.compare("go") == 0)
 		goRoom(command);
 
-    else if (commandWord.compare("take") == 0)
-    {
-       	if (!command.hasSecondWord()) {
-		cout << "incomplete input"<< endl;
-        }
-        else
-         if (command.hasSecondWord()) {
-        cout << "you're trying to take " + command.getSecondWord() << endl;
-        int location = currentRoom->isItemInRoom(command.getSecondWord());
-        if (location  < 0 )
-            cout << "item is not in room" << endl;
-        else
-            cout << "item is in room" << endl;
-            cout << "index number " << + location << endl;
-            cout << endl;
-            cout << currentRoom->longDescription() << endl;
-        }
-    }
+	else if (commandWord.compare("take") == 0)
+	{
+		if (!command.hasSecondWord())
+		{
+			cout << "incomplete input" << endl;
+		}
+		else if (command.hasSecondWord())
+		{
+			cout << "you're trying to take " + command.getSecondWord() << endl;
+			int location = currentRoom->isItemInRoom(command.getSecondWord());
+			if (location < 0)
+				cout << "item is not in room" << endl;
+			else
+				cout << "item is in room" << endl;
+			cout << "index number " << +location << endl;
+			cout << endl;
+			cout << currentRoom->longDescription() << endl;
+		}
+	}
 
-    else if (commandWord.compare("put") == 0)
-    {
-
-    }
-    /*
-    {
-    if (!command.hasSecondWord()) {
+	else if (commandWord.compare("put") == 0)
+	{
+	}
+	/*
+	{
+	if (!command.hasSecondWord()) {
 		cout << "incomplete input"<< endl;
-        }
-        else
-            if (command.hasSecondWord()) {
-            cout << "you're adding " + command.getSecondWord() << endl;
-            itemsInRoom.push_Back;
-        }
-    }
+		}
+		else
+			if (command.hasSecondWord()) {
+			cout << "you're adding " + command.getSecondWord() << endl;
+			itemsInRoom.push_Back;
+		}
+	}
 */
-    else if (commandWord.compare("quit") == 0) {
+	else if (commandWord.compare("quit") == 0)
+	{
 		if (command.hasSecondWord())
-			cout << "overdefined input"<< endl;
+			cout << "overdefined input" << endl;
 		else
 			return true; /**signal to quit*/
 	}
 	return false;
 }
 /** COMMANDS **/
-void Game::printHelp() {
+void Game::printHelp()
+{
 	cout << "valid inputs are; " << endl;
 	parser.showCommands();
-
 }
 
-void Game::goRoom(Command command) {
-	if (!command.hasSecondWord()) {
-		cout << "incomplete input"<< endl;
+void Game::goRoom(Command command)
+{
+	if (!command.hasSecondWord())
+	{
+		cout << "incomplete input" << endl;
 		return;
 	}
 
 	string direction = command.getSecondWord();
 
 	// Try to leave current room.
-	Room* nextRoom = currentRoom->nextRoom(direction);
+	Room *nextRoom = currentRoom->nextRoom(direction);
 
 	if (nextRoom == NULL)
-		cout << "underdefined input"<< endl;
-	else {
+		cout << "underdefined input" << endl;
+	else
+	{
 		currentRoom = nextRoom;
 		cout << currentRoom->longDescription() << endl;
 	}
 }
 
-string Game::go(string direction) {
-	//Make the direction lowercase
-	//transform(direction.begin(), direction.end(), direction.begin(),:: tolower);
-	//Move to the next room
-	Room* nextRoom = currentRoom->nextRoom(direction);
+string Game::go(string direction)
+{
+	// Make the direction lowercase
+	// transform(direction.begin(), direction.end(), direction.begin(),:: tolower);
+	// Move to the next room
+	Room *nextRoom = currentRoom->nextRoom(direction);
 	if (nextRoom == NULL)
-		return("direction null");
+		return ("direction null");
 	else
 	{
 		currentRoom = nextRoom;
