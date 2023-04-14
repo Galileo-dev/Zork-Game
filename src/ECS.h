@@ -10,7 +10,6 @@
 #include <set>
 
 // entity types
-
 using Entity = std::uint32_t;
 
 const Entity MAX_ENTITIES = 5000; // Maximum number of entities
