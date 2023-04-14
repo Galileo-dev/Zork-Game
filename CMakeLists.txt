@@ -1,5 +1,5 @@
 # Set minimum CMake version
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.19)
 
 # Set project name and version
 project(Game 
@@ -17,39 +17,46 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 qt_standard_project_setup()
 
+add_subdirectory(src/app)
+add_subdirectory(src/logic)
 
-# Add executable target
-add_executable(${PROJECT_NAME}
-    src/Game.cpp
-    src/mainwindow.ui
-    src/mainwindow.cpp
-    src/Room.cpp
-    src/Item.cpp
-    src/Command.cpp
-    src/Parser.cpp
-    src/CommandWords.cpp
-
+target_link_libraries(${PROJECT_NAME} PRIVATE
+    logic
+    Qt6::Widgets
 )
 
-# # Add source files
-# target_sources(${PROJECT_NAME}
-#     PRIVATE
-       
+# # Add executable target
+# add_executable(${PROJECT_NAME}
+#     src/Game.cpp
+#     src/mainwindow.ui
+#     src/mainwindow.cpp
+#     src/Room.cpp
+#     src/Item.cpp
+#     src/Command.cpp
+#     src/Parser.cpp
+#     src/CommandWords.cpp
 
 # )
 
-# Add include directories
-target_include_directories(${PROJECT_NAME}
-    PRIVATE
-        include
-)
+# # # Add source files
+# # target_sources(${PROJECT_NAME}
+# #     PRIVATE
+       
 
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Widgets)
+# # )
 
-# Set output directory
-set_target_properties(${PROJECT_NAME}
-    PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build
-        WIN32_EXECUTABLE ON
-        MACOSX_BUNDLE ON
-)
+# # Add include directories
+# target_include_directories(${PROJECT_NAME}
+#     PRIVATE
+#         include
+# )
+
+# target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Widgets)
+
+# # Set output directory
+# set_target_properties(${PROJECT_NAME}
+#     PROPERTIES
+#         RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build
+#         WIN32_EXECUTABLE ON
+#         MACOSX_BUNDLE ON
+# )

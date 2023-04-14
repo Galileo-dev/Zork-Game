@@ -18,3 +18,5 @@ mkdir -p ../Release && cp ./src/app/Game.app/Contents/MacOS/Game ../Release/Game
 
 # in the future, we will copy the resources from the build directory to the release directory
 
+# run the executable
+cd ../Release && ./Game
