@@ -6,17 +6,18 @@
 #include <vector>
 using namespace std;
 
-class CommandWords {
+class CommandWords
+{
 private:
-	//Define a static vector for our valid command words.
-	//We'll populate this in the class constructor
+	// Define a static vector for our valid command words.
+	// We'll populate this in the class constructor
 	static vector<string> validCommands;
 
 public:
 	CommandWords();
 	bool isCommand(string aString);
 	void showAll();
+	void autoComplete(string currentString);
 };
-
 
 #endif /*COMMANDWORDS_H_*/

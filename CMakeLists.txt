@@ -1,5 +1,5 @@
 # Set minimum CMake version
-cmake_minimum_required(VERSION 3.19)
+cmake_minimum_required(VERSION 3.16)
 
 # Set project name and version
 project(Game 
@@ -17,46 +17,55 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 qt_standard_project_setup()
 
-add_subdirectory(src/app)
-add_subdirectory(src/logic)
+# Set the source directories for each component
+set(MODEL_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/model")
+set(GUI_VIEW_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/view/gui")
+set(CLI_VIEW_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/view/cli")
+set(CONTROLLER_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/controller")
 
-target_link_libraries(${PROJECT_NAME} PRIVATE
-    logic
-    Qt6::Widgets
+# Add the source files for the model
+add_library(model
+        ${MODEL_DIR}/Room.cpp
+        ${MODEL_DIR}/Item.cpp
+        ${MODEL_DIR}/Command.cpp
+        ${MODEL_DIR}/Parser.cpp
+        ${MODEL_DIR}/CommandWords.cpp
 )
 
-# # Add executable target
-# add_executable(${PROJECT_NAME}
-#     src/Game.cpp
-#     src/mainwindow.ui
-#     src/mainwindow.cpp
-#     src/Room.cpp
-#     src/Item.cpp
-#     src/Command.cpp
-#     src/Parser.cpp
-#     src/CommandWords.cpp
+include_directories(${MODEL_DIR})
 
-# )
+# Add the source files for the GUI view
+set(GUI_VIEW_SRCS
+        ${GUI_VIEW_DIR}/GameGUI.cpp
+        ${GUI_VIEW_DIR}/GameWindow.cpp
+        ${GUI_VIEW_DIR}/GameWindow.ui
+)
 
-# # # Add source files
-# # target_sources(${PROJECT_NAME}
-# #     PRIVATE
-       
+qt_add_executable(gui_view ${GUI_VIEW_SRCS})
+target_link_libraries(gui_view PRIVATE model Qt6::Widgets)
 
-# # )
+# Add the source files for the CLI view
+add_executable(cli_view
+        ${CLI_VIEW_DIR}/GameCLI.cpp
+)
 
-# # Add include directories
-# target_include_directories(${PROJECT_NAME}
-#     PRIVATE
-#         include
-# )
+include_directories(${CLI_VIEW_DIR})
 
-# target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Widgets)
+# Add the source files for the controller
+add_executable(controller
+        ${CONTROLLER_DIR}/GameController.cpp
+)
 
-# # Set output directory
-# set_target_properties(${PROJECT_NAME}
-#     PROPERTIES
-#         RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build
-#         WIN32_EXECUTABLE ON
-#         MACOSX_BUNDLE ON
-# )
+# add all headers to the project
+file(GLOB_RECURSE HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/src/*.h)
+
+include_directories(${CONTROLLER_DIR})
+
+# Link the targets with necessary libraries
+target_link_libraries(cli_view PRIVATE model)
+target_link_libraries(controller PRIVATE model)
+
+set_target_properties(gui_view PROPERTIES
+    WIN32_EXECUTABLE ON
+    MACOSX_BUNDLE ON
+)

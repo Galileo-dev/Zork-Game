@@ -5,9 +5,11 @@ vector<string> CommandWords::validCommands;
 /**
  * Constructor - initialise the command words.
  */
-CommandWords::CommandWords() {
+CommandWords::CommandWords()
+{
 	// Populate the vector if we haven't already.
-	if (validCommands.empty()) {
+	if (validCommands.empty())
+	{
 		validCommands.push_back("go");
 		validCommands.push_back("quit");
 		validCommands.push_back("info");
@@ -21,7 +23,8 @@ CommandWords::CommandWords() {
  * Check whether a given String is a valid command word.
  * Return true if it is, false if it isn't.
  **/
-bool CommandWords::isCommand(string aString) {
+bool CommandWords::isCommand(string aString)
+{
 	for (unsigned int i = 0; i < validCommands.size(); i++)
 	{
 		if (validCommands[i].compare(aString) == 0)
@@ -34,11 +37,12 @@ bool CommandWords::isCommand(string aString) {
 /*
  * Print all valid commands to System.out.
  */
-void CommandWords::showAll() {
-	//Loops through validCommands and prints each to the screen.
+void CommandWords::showAll()
+{
+	// Loops through validCommands and prints each to the screen.
 	for (unsigned int i = 0; i < validCommands.size(); i++)
 	{
-		cout << validCommands[i]<< "  ";
+		cout << validCommands[i] << "  ";
 	}
 	cout << endl;
 }

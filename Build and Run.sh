@@ -1,5 +1,5 @@
 # start by removing the old release
-rm -rf release
+rm -rf Release
 
 # make build directory if it doesn't exist
 mkdir -p build
@@ -14,9 +14,9 @@ cmake ..
 make
 
 # copy the executable from the build directory to the release directory mac
-mkdir -p ../Release && cp ./src/app/Game.app/Contents/MacOS/Game ../Release/Game
+mkdir -p ../Release && cp ./cli_view ../Release/Game
 
 # in the future, we will copy the resources from the build directory to the release directory
 
-# run the executable
+#  run
 cd ../Release && ./Game
