@@ -2,7 +2,6 @@
 #define GameCLI_H_
 
 #include "Command.h"
-#include "Parser.h"
 #include "Room.h"
 #include "item.h"
 #include <iostream>

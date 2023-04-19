@@ -28,8 +28,7 @@ add_library(model
         ${MODEL_DIR}/Room.cpp
         ${MODEL_DIR}/Item.cpp
         ${MODEL_DIR}/Command.cpp
-        ${MODEL_DIR}/Parser.cpp
-        ${MODEL_DIR}/CommandWords.cpp
+        ${MODEL_DIR}/CommandUtils.cpp
 )
 
 include_directories(${MODEL_DIR})

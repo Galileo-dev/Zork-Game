@@ -30,7 +30,7 @@ void GameCLI::start()
 	cout << "start" << endl;
 	cout << "info for help" << endl;
 	cout << endl;
-	cout << this->gameState->getCurentRoom()->longDescription() << endl;
+	cout << this->gameState->getCurentRoom().longDescription() << endl;
 
 	bool finished = false;
 	while (!finished)

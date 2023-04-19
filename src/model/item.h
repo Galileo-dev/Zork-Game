@@ -6,25 +6,27 @@
 #include <iostream>
 using namespace std;
 
-class Item {
+class Item
+{
 private:
-	string description;
-	string longDescription;
-	int weightGrams;
+	string identifier;		// identifier
+	string description;		// this wil be the short description used in the room
+	string longDescription; // this will be the long description used when the player looks at the item
+	float weight;
 	float value;
-	bool weaponCheck;
-
+	// TODO: add stats
+	bool isWeapon;
+	bool isQuestItem; // these cannot be dropped or stored in a chest... but have no weight
 public:
-    Item (string description, int inWeight, float inValue);
-    Item (string description);
+	Item(string identifier, string description, int weight, float value, bool isWeapon, bool isQuestItem);
 	string getShortDescription();
-    string getLongDescription();
-	int getWeight();
-	void setWeight(int weightGrams);
-	float getValue();
+	string getLongDescription();
+	float getWeight();
+	void setWeight(float weight);
 	void setValue(float value);
-	int getWeaponCheck();
-	void setWeaponCheck(int weaponCheck);
+	float getValue();
+	bool isWeapon();
+	void isWeapon(bool weaponCheck);
 };
 
 #endif /*ITEM_H_*/

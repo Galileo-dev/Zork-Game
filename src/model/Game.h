@@ -2,7 +2,6 @@
 #define GameState_H_
 
 #include "Command.h"
-#include "Parser.h"
 #include "item.h"
 #include "Room.h"
 #include <iostream>
@@ -13,9 +12,9 @@ using namespace std;
 class GameState
 {
 private:
-    int currentRoomIndex;
-    vector<Item> items;
-    vector<Room> rooms;
+    Room *currentRoom;
+    std::map<string, Item> items;
+    std::map<string, Room> rooms;
 
 public:
     GameState();

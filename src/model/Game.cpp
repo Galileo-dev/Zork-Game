@@ -22,7 +22,7 @@ GameState::GameState()
     createItems();
 }
 
-GameState::setup()
+void GameState::setup()
 {
     createRooms();
     createItems();
@@ -30,12 +30,11 @@ GameState::setup()
 
 void GameState::createRooms()
 {
+    // Todo: read from file
     Room *a, *b, *c, *d, *e, *f, *g, *h, *i;
 
     a = new Room("a");
-
     b = new Room("b");
-
     c = new Room("c");
     d = new Room("d");
     e = new Room("e");
@@ -55,13 +54,48 @@ void GameState::createRooms()
     h->setExits(NULL, f, NULL, NULL);
     i->setExits(NULL, d, NULL, NULL);
 
-    currentRoom = a; // start game at room a
+    // store rooms in a map
+    // could be useful for teleport or something
+    this->rooms["a"] = *a;
+    this->rooms["b"] = *b;
+    this->rooms["c"] = *c;
+    this->rooms["d"] = *d;
+    this->rooms["e"] = *e;
+    this->rooms["f"] = *f;
+    this->rooms["g"] = *g;
+    this->rooms["h"] = *h;
+    this->rooms["i"] = *i;
+
+    // set current room to a
+    // use a pointer
+    // use this->rooms
+    this->currentRoom = &this->rooms["a"];
 }
 
 void GameState::createItems()
 {
-    a->addItem(new Item("x", 1, 11));
-    a->addItem(new Item("y", 2, 22));
+    // Todo: read from file
+
+    // I want to create a master list of items
+    // and then add them to the rooms
+
+    // every item has a unique id
+    // using camel case for the name
+
+    // a sword
+    items["zork_slayer"] = Item("zork_slayer", "a sword buitl from the bones of a zork", 10, 400, true, false);
+    // a shield
+    items["zork_shield"] = Item("zork_shield", "a shield made from the skin of a zork", 20, 500, true, false);
+    // a key
+    items["zork_key"] = Item("zork_key", "a key made from the teeth of a zork", 30, 100, true, false);
+
+    // create items
+    Room *a = &this->rooms["a"];
+    // add the sword to room a
+    a->addItem(&items["zork_slayer"]);
+    // add the shield to room a
+
+    Room *b = &this->rooms["b"];
     b->addItem(new Item("xx", 3, 33));
     b->addItem(new Item("yy", 4, 44));
 }
