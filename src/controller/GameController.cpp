@@ -1,4 +1,7 @@
-#include <GameCLI.h>
+#include <../view/cli/GameCLI.h>
+#include <../view/gui/GameGUI.h>
+
+#include <../model/Game.h>
 
 int main(int argc, char const *argv[])
 {

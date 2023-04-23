@@ -14,6 +14,8 @@ _deps
 vcpkg_installed
 
 .qt
+.cache
+.vscode
 zork_game_autogen
 
 .DS_Store

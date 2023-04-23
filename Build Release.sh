@@ -1,11 +1,14 @@
 # start by removing the old release
-rm -rf release
+rm -rf Release
+
+# Delete build folder
+rm -rf build/
 
 # make build directory if it doesn't exist
-mkdir -p build
+mkdir build/
 
 # go into the build directory
-cd build
+cd build/
 
 # run cmake to generate the build files
 cmake ..
