@@ -16,19 +16,19 @@ using namespace std;
 // 	return a.exec();
 // }
 
-GameState::GameState()
+GameModel::GameModel()
 {
     createRooms();
     createItems();
 }
 
-void GameState::setup()
+void GameModel::setup()
 {
     createRooms();
     createItems();
 }
 
-void GameState::createRooms()
+void GameModel::createRooms()
 {
     // Todo: read from file
     Room *a, *b, *c, *d, *e, *f, *g, *h, *i;
@@ -72,7 +72,7 @@ void GameState::createRooms()
     this->currentRoom = &this->rooms["a"];
 }
 
-void GameState::createItems()
+void GameModel::createItems()
 {
     // Todo: read from file
 
@@ -100,7 +100,7 @@ void GameState::createItems()
     b->addItem(new Item("yy", 4, 44));
 }
 
-void GameState::go(Direction direction)
+void GameModel::go(Direction direction)
 {
     // check if the room in the given direction is not null
     if (currentRoom->getRoom(direction) != NULL)
@@ -114,7 +114,7 @@ void GameState::go(Direction direction)
     }
 }
 
-Room GameState::getCurentRoom()
+Room GameModel::getCurentRoom()
 {
     return this->rooms.at(this->currentRoomIndex);
 }

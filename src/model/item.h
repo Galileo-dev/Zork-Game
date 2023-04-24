@@ -25,8 +25,8 @@ public:
 	void setWeight(float weight);
 	void setValue(float value);
 	float getValue();
-	bool isWeapon();
-	void isWeapon(bool weaponCheck);
+	bool getIsWeapon();
+	void setIsWeapon(bool weaponCheck);
 };
 
 #endif /*ITEM_H_*/

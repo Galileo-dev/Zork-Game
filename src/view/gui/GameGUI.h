@@ -11,7 +11,7 @@ private:
 public:
     GameGUI();
     void start();
-    void setup();
+    void setup(GameModel *GameModel);
 };
 
 #endif /*GameGUI_H_*/

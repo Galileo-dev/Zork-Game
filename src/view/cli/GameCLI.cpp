@@ -3,29 +3,17 @@
 #include <iostream>
 #include <string>
 
+#include "../Utils.h"
+
 using namespace std;
 
-int main(int argc, char *argv[])
+void GameCLI::setup(GameModel *gameModel)
 {
-	GameCLI gameCLI;
-	gameCLI.setup();
-	gameCLI.start();
-	return 0;
 }
-
-void GameCLI::setup()
-{
-	// Setup game
-	GameState game;
-	game.setup();
-	// pass our game state pointer to the game
-	this->gameState = &game;
-}
-
 /**
  *  Main play routine.  Loops until end of play.
  */
-void GameCLI::start()
+void GameCLI::start(currentRoom room)
 {
 	cout << "start" << endl;
 	cout << "info for help" << endl;
@@ -42,7 +30,7 @@ void GameCLI::start()
 		getline(cin, input);
 
 		// create command object
-		CommandManager command = CommandManager::fromString(input);
+		// CommandManager command = CommandManager::fromString(input);
 
 		// validate command
 		if (!command.validate())

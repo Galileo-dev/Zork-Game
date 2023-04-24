@@ -1,11 +1,9 @@
 #ifndef GameCLI_H_
 #define GameCLI_H_
 
-#include "Command.h"
-#include "Room.h"
-#include "item.h"
 #include <iostream>
 #include <string>
+#include "../Utils.h"
 using namespace std;
 
 class GameCLI
@@ -16,13 +14,14 @@ private:
 	void printItems();
 	void printHelp();
 	bool processCommand(CommandManager command);
-	GameState *gameState;
+	GameModel *gameState;
+	string go(string direction);
 
 public:
 	GameCLI();
 	void start();
-	void setup();
-	string go(string direction);
+	void setup(GameModel *gameModel);
+	void update(ACTION action);
 };
 
 #endif /*GameCLI_H_*/
