@@ -59,13 +59,13 @@ target_include_directories(controller PUBLIC ${CONTROLLER_DIR})
 # Link the targets with necessary libraries
 target_link_libraries(gui_view PUBLIC model)
 target_link_libraries(cli_view PUBLIC model)
-target_link_libraries(controller PUBLIC model)
+target_link_libraries(controller PUBLIC model Qt6::Widgets)
 
 
 
 # Create the executable target
 add_executable(game ${CONTROLLER_DIR}/GameController.cpp)
-target_link_libraries(game PUBLIC controller model gui_view cli_view)
+target_link_libraries(game PUBLIC controller model gui_view cli_view )
 
 
 
