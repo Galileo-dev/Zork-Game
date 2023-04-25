@@ -14,7 +14,7 @@ class GameModel
 private:
     Room *currentRoom;
     std::map<string, Item> items;
-    std::map<string, Room> rooms;
+    std::map<string, Room *> rooms;
 
 public:
     GameModel();
@@ -22,7 +22,7 @@ public:
     void setup();
     void createRooms();
     void createItems();
-    Room getCurentRoom();
+    Room *getCurentRoom();
     vector<Item> *getAvailableItems();
 };
 

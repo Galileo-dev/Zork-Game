@@ -3,25 +3,16 @@
 
 #include <iostream>
 #include <string>
-#include "../Utils.h"
+#include "../../model/Game.h"
 using namespace std;
 
 class GameCLI
 {
 private:
-	CommandManager commandManager;
-	void printWelcome();
-	void printItems();
-	void printHelp();
-	bool processCommand(CommandManager command);
-	GameModel *gameState;
-	string go(string direction);
-
 public:
 	GameCLI();
 	void start();
-	void setup(GameModel *gameModel);
-	void update(ACTION action);
+	void update(const GameModel *gameModel);
 };
 
 #endif /*GameCLI_H_*/

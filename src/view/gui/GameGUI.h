@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <string>
+#include "../../model/Game.h"
+#include <QApplication>
 using namespace std;
 
 class GameGUI
@@ -10,8 +12,8 @@ class GameGUI
 private:
 public:
     GameGUI();
-    void start();
-    void setup(GameModel *GameModel);
+    QApplication start();
+    void update(const GameModel *GameModel);
 };
 
 #endif /*GameGUI_H_*/

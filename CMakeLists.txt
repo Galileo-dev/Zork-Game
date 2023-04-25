@@ -15,7 +15,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON) 
 
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
-# qt_standard_project_setup()
+qt_standard_project_setup()
 
 # Set the source directories for each component
 set(MODEL_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/model")
@@ -28,6 +28,8 @@ add_library(model
         ${MODEL_DIR}/Item.cpp
         ${MODEL_DIR}/Command.cpp
         ${MODEL_DIR}/CommandUtils.cpp
+        ${MODEL_DIR}/Game.cpp
+        
 )
 
 target_include_directories(model PUBLIC ${MODEL_DIR})
@@ -36,8 +38,8 @@ target_include_directories(model PUBLIC ${MODEL_DIR})
 set(GUI_VIEW_DIR "${VIEW_DIR}/gui")
 set(GUI_VIEW_SRCS
         ${GUI_VIEW_DIR}/GameGUI.cpp
-        ${GUI_VIEW_DIR}/GameWindow.cpp
-        ${GUI_VIEW_DIR}/GameWindow.ui
+        ${GUI_VIEW_DIR}/MainWindow.cpp
+        ${GUI_VIEW_DIR}/MainWindow.ui
 )
 add_library(gui_view ${GUI_VIEW_SRCS})
 target_include_directories(gui_view PUBLIC ${GUI_VIEW_DIR})
@@ -60,7 +62,15 @@ target_link_libraries(cli_view PUBLIC model)
 target_link_libraries(controller PUBLIC model)
 
 
-set_target_properties(gui_view PROPERTIES
+
+# Create the executable target
+add_executable(game ${CONTROLLER_DIR}/GameController.cpp)
+target_link_libraries(game PUBLIC controller model gui_view cli_view)
+
+
+
+
+set_target_properties(game PROPERTIES
     WIN32_EXECUTABLE ON
     MACOSX_BUNDLE ON
 )

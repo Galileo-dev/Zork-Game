@@ -1,7 +1,6 @@
 #include <iostream>
 
 #include "Game.h"
-#include "Direction.h"
 
 using namespace std;
 
@@ -56,20 +55,20 @@ void GameModel::createRooms()
 
     // store rooms in a map
     // could be useful for teleport or something
-    this->rooms["a"] = *a;
-    this->rooms["b"] = *b;
-    this->rooms["c"] = *c;
-    this->rooms["d"] = *d;
-    this->rooms["e"] = *e;
-    this->rooms["f"] = *f;
-    this->rooms["g"] = *g;
-    this->rooms["h"] = *h;
-    this->rooms["i"] = *i;
+    this->rooms["a"] = a;
+    this->rooms["b"] = b;
+    this->rooms["c"] = c;
+    this->rooms["d"] = d;
+    this->rooms["e"] = e;
+    this->rooms["f"] = f;
+    this->rooms["g"] = g;
+    this->rooms["h"] = h;
+    this->rooms["i"] = i;
 
     // set current room to a
     // use a pointer
     // use this->rooms
-    this->currentRoom = &this->rooms["a"];
+    this->currentRoom = this->rooms["a"];
 }
 
 void GameModel::createItems()
@@ -83,21 +82,21 @@ void GameModel::createItems()
     // using camel case for the name
 
     // a sword
-    items["zork_slayer"] = Item("zork_slayer", "a sword buitl from the bones of a zork", 10, 400, true, false);
-    // a shield
-    items["zork_shield"] = Item("zork_shield", "a shield made from the skin of a zork", 20, 500, true, false);
-    // a key
-    items["zork_key"] = Item("zork_key", "a key made from the teeth of a zork", 30, 100, true, false);
+    // items["zork_slayer"] = Item("zork_slayer", "a sword buitl from the bones of a zork", 10, 400, true, false);
+    // // a shield
+    // items["zork_shield"] = Item("zork_shield", "a shield made from the skin of a zork", 20, 500, true, false);
+    // // a key
+    // items["zork_key"] = Item("zork_key", "a key made from the teeth of a zork", 30, 100, true, false);
 
     // create items
-    Room *a = &this->rooms["a"];
+    // Room *a = this->rooms["a"];
     // add the sword to room a
-    a->addItem(&items["zork_slayer"]);
+    // a->addItem(&items["zork_slayer"]);
     // add the shield to room a
 
-    Room *b = &this->rooms["b"];
-    b->addItem(new Item("xx", 3, 33));
-    b->addItem(new Item("yy", 4, 44));
+    // Room *b = &this->rooms["b"];
+    // b->addItem(new Item("xx", 3, 33));
+    // b->addItem(new Item("yy", 4, 44));
 }
 
 void GameModel::go(Direction direction)
@@ -114,7 +113,7 @@ void GameModel::go(Direction direction)
     }
 }
 
-Room GameModel::getCurentRoom()
+Room *GameModel::getCurentRoom()
 {
-    return this->rooms.at(this->currentRoomIndex);
+    return this->currentRoom;
 }

@@ -14,8 +14,7 @@ cmake ..
 make
 
 # copy the executable from the build directory to the release directory mac
-mkdir -p ../Release && cp ./cli_view ../Release/Game
-
+mkdir -p ../Release && cp ./game.app/Contents/MacOS/game ../Release/Game
 # in the future, we will copy the resources from the build directory to the release directory
 
 #  run
