@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "Game.h"
+#include "GameState.h"
 
 using namespace std;
 
@@ -15,19 +15,19 @@ using namespace std;
 // 	return a.exec();
 // }
 
-GameModel::GameModel()
+GameState::GameState()
 {
     createRooms();
     createItems();
 }
 
-void GameModel::setup()
+void GameState::setup()
 {
     createRooms();
     createItems();
 }
 
-void GameModel::createRooms()
+void GameState::createRooms()
 {
     // Todo: read from file
     Room *a, *b, *c, *d, *e, *f, *g, *h, *i;
@@ -71,7 +71,7 @@ void GameModel::createRooms()
     this->currentRoom = this->rooms["a"];
 }
 
-void GameModel::createItems()
+void GameState::createItems()
 {
     // Todo: read from file
 
@@ -99,7 +99,7 @@ void GameModel::createItems()
     // b->addItem(new Item("yy", 4, 44));
 }
 
-void GameModel::go(Direction direction)
+void GameState::go(Direction direction)
 {
     // check if the room in the given direction is not null
     if (currentRoom->getRoom(direction) != NULL)
@@ -113,7 +113,7 @@ void GameModel::go(Direction direction)
     }
 }
 
-Room *GameModel::getCurentRoom()
+Room *GameState::getCurentRoom()
 {
     return this->currentRoom;
 }

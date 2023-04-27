@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <string>
-#include "../../model/Game.h"
+#include "../../model/GameState.h"
 using namespace std;
 
 class GameCLI
@@ -12,7 +12,7 @@ private:
 public:
 	GameCLI();
 	void start();
-	void update(const GameModel *gameModel);
+	void update(const GameState *gameModel);
 };
 
 #endif /*GameCLI_H_*/

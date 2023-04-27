@@ -3,9 +3,9 @@
 
 #include <QApplication>
 #include <QWidget>
-#include "../../model/Game.h"
+#include "../../model/GameState.h"
 
-class GameModel;
+class GameState;
 class MainWindow;
 
 struct InputArgs
@@ -26,7 +26,7 @@ public:
 
     void start(InputArgs &);
 
-    void update(const GameModel *gameModel);
+    void update(const GameState *gameModel);
 
 private:
 };

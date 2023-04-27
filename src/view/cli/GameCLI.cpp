@@ -1,4 +1,4 @@
-#include "Game.h"
+#include "GameState.h"
 #include "GameCLI.h"
 #include <iostream>
 #include <string>
@@ -31,7 +31,7 @@ void GameCLI::start()
 	}
 }
 
-void GameCLI::update(const GameModel *gameModel)
+void GameCLI::update(const GameState *gameModel)
 {
 }
 

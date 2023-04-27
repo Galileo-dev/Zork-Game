@@ -9,7 +9,7 @@
 using namespace std;
 
 // This the game and state of the game
-class GameModel
+class GameState
 {
 private:
     Room *currentRoom;
@@ -17,7 +17,7 @@ private:
     std::map<string, Room *> rooms;
 
 public:
-    GameModel();
+    GameState();
     void go(Direction direction);
     void setup();
     void createRooms();

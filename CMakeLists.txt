@@ -28,7 +28,8 @@ add_library(model
         ${MODEL_DIR}/Item.cpp
         ${MODEL_DIR}/Command.cpp
         ${MODEL_DIR}/CommandUtils.cpp
-        ${MODEL_DIR}/Game.cpp
+        ${MODEL_DIR}/GameState.cpp
+        ${MODEL_DIR}/GameModel.cpp
         
 )
 
@@ -60,7 +61,7 @@ target_include_directories(controller PUBLIC ${CONTROLLER_DIR})
 target_link_libraries(gui_view PUBLIC model)
 target_link_libraries(cli_view PUBLIC model)
 target_link_libraries(controller PUBLIC model Qt6::Widgets)
-
+target_link_libraries(model PUBLIC Qt6::Widgets)
 
 
 # Create the executable target

@@ -31,14 +31,17 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>801</width>
+      <width>791</width>
       <height>541</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
        <horstretch>0</horstretch>
@@ -49,6 +52,9 @@
       <string>Tab 1</string>
      </attribute>
      <widget class="QWidget" name="new_game" native="true">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>-1</x>

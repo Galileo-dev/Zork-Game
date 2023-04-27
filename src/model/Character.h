@@ -1,6 +1,6 @@
 
 #define CHARACTER_H_
-#include "Game.h"
+#include "GameState.h"
 
 #include <string>
 using namespace std;
