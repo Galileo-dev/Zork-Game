@@ -117,3 +117,11 @@ Room *GameState::getCurentRoom()
 {
     return this->currentRoom;
 }
+
+string GameState::getTerminalOutput()
+{
+    // build a string
+    string output = "";
+    output += "You are in room " + currentRoom->shortDescription() + "\n";
+    return output;
+}

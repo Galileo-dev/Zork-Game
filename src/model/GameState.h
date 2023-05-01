@@ -22,6 +22,8 @@ public:
     void setup();
     void createRooms();
     void createItems();
+    string getTerminalOutput(); // TODO: implement this
+
     Room *getCurentRoom();
     vector<Item> *getAvailableItems();
 };

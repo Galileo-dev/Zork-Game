@@ -22,7 +22,7 @@ public:
 	int numberOfItems();
 	Room(string description);
 	void setExits(Room *north, Room *east, Room *south, Room *west);
-	string shortDescription();
+	string const shortDescription();
 	string longDescription();
 	Room *getRoom(Direction direction);
 	void addItem(Item *inItem);

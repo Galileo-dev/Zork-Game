@@ -18,7 +18,7 @@ void Room::setExits(Room *north, Room *east, Room *south, Room *west)
         exits[WEST] = west;
 }
 
-string Room::shortDescription()
+string const Room::shortDescription()
 {
     return description;
 }

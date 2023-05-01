@@ -10,15 +10,22 @@ namespace Ui
 }
 QT_END_NAMESPACE
 
+#include "../../controller/GameController.h"
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    MainWindow(GameController *GameController, QWidget *parent = nullptr);
     ~MainWindow();
 
 private:
     Ui::MainWindow *ui;
+    GameController *m_gameController;
+    GameModel *m_gameModel;
+
+private slots:
+    void InputHandler(Action action, std::unordered_map<std::string, std::string> params);
+    void updateView(GameState *gameState);
 };
 #endif // MAINWINDOW_H

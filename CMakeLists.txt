@@ -14,6 +14,10 @@ set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake")
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON) 
 
+# set(CMAKE_EXE_LINKER_FLAGS_INIT "-fuse-ld=lld")
+# set(CMAKE_MODULE_LINKER_FLAGS_INIT "-fuse-ld=lld")
+# set(CMAKE_SHARED_LINKER_FLAGS_INIT "-fuse-ld=lld")
+
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 qt_standard_project_setup()
 

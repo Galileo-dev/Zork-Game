@@ -31,7 +31,7 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>801</width>
+      <width>791</width>
       <height>541</height>
      </rect>
     </property>
@@ -39,6 +39,9 @@
      <number>1</number>
     </property>
     <widget class="QWidget" name="tab">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
        <horstretch>0</horstretch>
@@ -49,6 +52,9 @@
       <string>Tab 1</string>
      </attribute>
      <widget class="QWidget" name="new_game" native="true">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>-1</x>
@@ -70,7 +76,7 @@
         <string>Start</string>
        </property>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>200</x>
@@ -149,10 +155,7 @@
         </item>
        </layout>
       </widget>
-      <zorder>label</zorder>
-      <zorder>comboBox</zorder>
-      <zorder>lineEdit_2</zorder>
-      <zorder>label_2</zorder>
+      <zorder>layoutWidget</zorder>
       <zorder>pushButton</zorder>
      </widget>
     </widget>
@@ -166,7 +169,7 @@
      <attribute name="title">
       <string>Tab 2</string>
      </attribute>
-     <widget class="QTextBrowser" name="textBrowser">
+     <widget class="QTextBrowser" name="terminalBox">
       <property name="geometry">
        <rect>
         <x>0</x>
@@ -186,7 +189,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;not connect?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit">
+     <widget class="QLineEdit" name="terminalInput">
       <property name="geometry">
        <rect>
         <x>0</x>

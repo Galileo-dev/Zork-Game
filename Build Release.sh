@@ -11,7 +11,7 @@ cd build/
 cmake ..
 
 # run make to build the project
-make
+make -j 4   
 
 # copy the executable from the build directory to the release directory mac
 mkdir -p ../Release && cp -f ./game.app/Contents/MacOS/game ../Release/Game

@@ -7,26 +7,25 @@
 
 #include <QStyleFactory>
 #include <QTimer>
-#include "GameController.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     QApplication::setStyle(QStyleFactory::create("macos"));
+    GameController gameController = new GameController();
+    MainWindow w(&gameController);
 
-    GameController gameController;
-    // QApplication::setProperty("GameState", QVariant::fromValue(game));
-    MainWindow w;
     w.show();
     return a.exec();
-    return 0;
 }
 
 GameController::GameController(QObject *parent) : QObject(parent)
 {
+    // GUI Elements
+    m_gameModel = new GameModel();
 }
 
-void GameController::updateGameState()
+void GameController::updateGameState(Action action, std::unordered_map<std::string, std::string> params)
 {
-    m_gameModel.updateGameState();
+    m_gameModel->updateGameState(action, params);
 }

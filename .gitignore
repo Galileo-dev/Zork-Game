@@ -22,4 +22,4 @@ zork_game_autogen
 
 **/gui/test/
 .autosave
-/Release
+Release
