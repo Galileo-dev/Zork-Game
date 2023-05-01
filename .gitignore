@@ -23,3 +23,5 @@ zork_game_autogen
 **/gui/test/
 .autosave
 Release
+.DS_Store
+.cache
