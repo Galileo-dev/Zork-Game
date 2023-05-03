@@ -22,6 +22,8 @@ public:
     void setup();
     void createRooms();
     void createItems();
+    void createCharacter();
+    void setDifficulty();
     string getTerminalOutput(); // TODO: implement this
 
     Room *getCurentRoom();

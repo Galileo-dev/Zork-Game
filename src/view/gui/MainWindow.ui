@@ -36,9 +36,9 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
-    <widget class="QWidget" name="tab">
+    <widget class="QWidget" name="gui">
      <property name="enabled">
       <bool>true</bool>
      </property>
@@ -51,7 +51,7 @@
      <attribute name="title">
       <string>Tab 1</string>
      </attribute>
-     <widget class="QWidget" name="new_game" native="true">
+     <widget class="QWidget" name="newGameButton" native="true">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -63,103 +63,180 @@
         <height>511</height>
        </rect>
       </property>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QStackedWidget" name="stackedWidget">
        <property name="geometry">
         <rect>
-         <x>320</x>
-         <y>410</y>
-         <width>100</width>
-         <height>32</height>
+         <x>-1</x>
+         <y>-1</y>
+         <width>791</width>
+         <height>511</height>
         </rect>
        </property>
-       <property name="text">
-        <string>Start</string>
+       <property name="currentIndex">
+        <number>0</number>
        </property>
-      </widget>
-      <widget class="QWidget" name="layoutWidget">
-       <property name="geometry">
-        <rect>
-         <x>200</x>
-         <y>40</y>
-         <width>381</width>
-         <height>114</height>
-        </rect>
-       </property>
-       <layout class="QVBoxLayout" name="verticalLayout_4">
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayout_2">
+       <widget class="QWidget" name="introduction">
+        <widget class="QPushButton" name="startButton">
+         <property name="geometry">
+          <rect>
+           <x>330</x>
+           <y>400</y>
+           <width>100</width>
+           <height>32</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Start</string>
+         </property>
+        </widget>
+        <widget class="QWidget" name="layoutWidget">
+         <property name="geometry">
+          <rect>
+           <x>210</x>
+           <y>30</y>
+           <width>381</width>
+           <height>114</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
-           <widget class="QLabel" name="label">
-            <property name="autoFillBackground">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>Select Mode</string>
-            </property>
-           </widget>
+           <layout class="QVBoxLayout" name="verticalLayout_2">
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="autoFillBackground">
+               <bool>false</bool>
+              </property>
+              <property name="text">
+               <string>Select Mode</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="modeSelectionInput">
+              <property name="editable">
+               <bool>false</bool>
+              </property>
+              <property name="duplicatesEnabled">
+               <bool>false</bool>
+              </property>
+              <property name="frame">
+               <bool>true</bool>
+              </property>
+              <property name="modelColumn">
+               <number>0</number>
+              </property>
+              <item>
+               <property name="text">
+                <string>Normal (Recommended)</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Easy</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Hard</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Cursed</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+           </layout>
           </item>
           <item>
-           <widget class="QComboBox" name="comboBox">
-            <property name="editable">
-             <bool>false</bool>
-            </property>
-            <property name="duplicatesEnabled">
-             <bool>false</bool>
-            </property>
-            <property name="frame">
-             <bool>true</bool>
-            </property>
-            <property name="modelColumn">
-             <number>0</number>
-            </property>
+           <layout class="QVBoxLayout" name="verticalLayout_3">
             <item>
-             <property name="text">
-              <string>Normal (Recommended)</string>
-             </property>
+             <widget class="QLabel" name="label_2">
+              <property name="autoFillBackground">
+               <bool>false</bool>
+              </property>
+              <property name="text">
+               <string>Character Name</string>
+              </property>
+             </widget>
             </item>
             <item>
-             <property name="text">
-              <string>Easy</string>
-             </property>
+             <widget class="QLineEdit" name="characterNameInput"/>
             </item>
-            <item>
-             <property name="text">
-              <string>Hard</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Cursed</string>
-             </property>
-            </item>
-           </widget>
+           </layout>
           </item>
          </layout>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayout_3">
-          <item>
-           <widget class="QLabel" name="label_2">
-            <property name="autoFillBackground">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>Character Name</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="lineEdit_2"/>
-          </item>
-         </layout>
-        </item>
-       </layout>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="gameAdventure">
+        <widget class="QPushButton" name="northButton">
+         <property name="geometry">
+          <rect>
+           <x>370</x>
+           <y>400</y>
+           <width>51</width>
+           <height>51</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>North</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="southButton">
+         <property name="geometry">
+          <rect>
+           <x>370</x>
+           <y>450</y>
+           <width>51</width>
+           <height>51</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>South</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="eastButton">
+         <property name="geometry">
+          <rect>
+           <x>430</x>
+           <y>420</y>
+           <width>51</width>
+           <height>51</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>East</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="westButton">
+         <property name="geometry">
+          <rect>
+           <x>310</x>
+           <y>420</y>
+           <width>51</width>
+           <height>51</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>West</string>
+         </property>
+        </widget>
+        <widget class="QGraphicsView" name="graphicsAdventureView">
+         <property name="geometry">
+          <rect>
+           <x>-5</x>
+           <y>1</y>
+           <width>791</width>
+           <height>391</height>
+          </rect>
+         </property>
+        </widget>
+       </widget>
       </widget>
-      <zorder>layoutWidget</zorder>
-      <zorder>pushButton</zorder>
      </widget>
     </widget>
-    <widget class="QWidget" name="tab_2">
+    <widget class="QWidget" name="cli">
      <property name="sizePolicy">
       <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
        <horstretch>0</horstretch>

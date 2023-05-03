@@ -22,10 +22,10 @@ int main(int argc, char *argv[])
 GameController::GameController(QObject *parent) : QObject(parent)
 {
     // GUI Elements
-    m_gameModel = new GameModel();
+    // m_gameModel = new GameModel();
 }
 
 void GameController::updateGameState(Action action, std::unordered_map<std::string, std::string> params)
 {
-    m_gameModel->updateGameState(action, params);
+    m_gameModel.updateGameState(action, params);
 }

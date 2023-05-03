@@ -17,6 +17,7 @@ using namespace std;
 
 GameState::GameState()
 {
+
     createRooms();
     createItems();
 }

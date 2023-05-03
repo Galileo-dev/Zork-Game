@@ -11,9 +11,9 @@ MainWindow::MainWindow(GameController *gameController, QWidget *parent)
     connect(m_gameModel, &GameModel::gameStateChanged, this, &MainWindow::updateView);
 
     // start new game
-    connect(ui->pushButton, &QPushButton::clicked, this, [=]()
+    connect(ui->startButton, &QPushButton::clicked, this, [=]()
             {
-                unordered_map<string, string> params = {{"difficulty", ui->comboBox->currentText().toStdString()}, {"player_name", ui->lineEdit_2->text().toStdString()}};
+                unordered_map<string, string> params = {{"difficulty", ui->modeSelectionInput->currentText().toStdString()}, {"player_name", ui->characterNameInput->text().toStdString()}};
                  InputHandler(Action::StartGame, params); });
 
     // command line input
