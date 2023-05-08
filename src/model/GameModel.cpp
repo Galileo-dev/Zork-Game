@@ -15,19 +15,25 @@ void GameModel::updateGameState(Action action, std::unordered_map<std::string, s
     std::cout << "params: " << std::endl;
     for (auto &param : params)
     {
-        std::cout << param.first << ": " << param.second << std::endl;
+        std::cout << param.first << ": " << param.second << ",";
     }
     // update game state
 
     switch (action)
     {
+
     case Action::StartGame:
-        // m_gameState = GameState(params);
+        if (params["player_name"] == "")
+        {
+            GameModel
+        }
+
+        m_gameState.createCharacter(params["player_name"]);
         break;
     }
 
     // update view
-    emit gameStateChanged(&m_gameState);
+    emit gameModelChanged(&m_gameState);
 }
 
 const GameState &GameModel::gameState()

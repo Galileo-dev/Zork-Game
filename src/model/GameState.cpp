@@ -126,3 +126,7 @@ string GameState::getTerminalOutput()
     output += "You are in room " + currentRoom->shortDescription() + "\n";
     return output;
 }
+
+void GameState::createCharacter(string name)
+{
+}

@@ -55,7 +55,7 @@ void GameCLI::update(const GameState *gameModel)
 // 	getline(cin, input);
 
 // 	// create command object
-// 	// CommandManager command = CommandManager::fromString(input);
+// 	// Command command = Command::fromString(input);
 
 // 	// validate command
 // 	if (!command.validate())
@@ -83,7 +83,7 @@ void GameCLI::update(const GameState *gameModel)
  * If this command ends the Game game, true is returned, otherwise false is
  * returned.
  */
-// bool GameCLI::processCommand(CommandManager command)
+// bool GameCLI::processCommand(Command command)
 // {
 // 	if (command.isUnknown())
 // 	{

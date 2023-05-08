@@ -3,27 +3,30 @@
 
 #include <string>
 #include <vector>
-#include "Room.h"
-#include "CommandUtils.h"
+// #include "../model/Action.h"
+#include "../model/GameState.h"
+#include <unordered_map>
+#include <tuple>
 
 using namespace std;
 
-class CommandManager
+class Command
 {
 private:
 	std::vector<string> currentCommand;
 	std::vector<string> validCommands;
 
 public:
-	void setCommand(string command);
-	CommandManager();
+	Command(string command);
 	std::vector<string> arguments;
 	string getCommandWord();
 	bool isUnknown();
 	bool hasSecondWord();
-	void giveSuggestions(Room *currentRoom);
+	void giveSuggestions(GameState *gameState);
 	void giveUsage();
 	bool validate();
+	// parse returns [Action, params]
+	// tuple<Action, std::unordered_map<std::string, std::string>> parse();
 };
 
 #endif /*COMMAND_H_*/

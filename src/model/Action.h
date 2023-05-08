@@ -7,5 +7,7 @@ enum Action
     Go,           // go to a room (params: room_name)
     UseItem,      // use an item (params: item_name)
     Attack,       // attack an enemy (params: enemy_name)
-    Quit          // quit the game (params: none)
+    Quit,         // quit the game (params: none)
+    Help,         // print help message (params: none)
+    Invalid       // invalid command (params: none)
 };

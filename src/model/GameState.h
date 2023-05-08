@@ -1,9 +1,9 @@
 #ifndef GameState_H_
 #define GameState_H_
 
-#include "Command.h"
 #include "item.h"
 #include "Room.h"
+#include "Character.h"
 #include <iostream>
 #include <string>
 using namespace std;
@@ -12,6 +12,7 @@ using namespace std;
 class GameState
 {
 private:
+    Character character;
     Room *currentRoom;
     std::map<string, Item> items;
     std::map<string, Room *> rooms;
@@ -22,7 +23,7 @@ public:
     void setup();
     void createRooms();
     void createItems();
-    void createCharacter();
+    void createCharacter(string name);
     void setDifficulty();
     string getTerminalOutput(); // TODO: implement this
 

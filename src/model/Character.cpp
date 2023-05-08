@@ -1,23 +1,28 @@
-/*#include "Character.h"
+#include "Character.h"
 
-Characterx::Characterx(string description) {
-	this->description = description;
-}
-void Characterx::addItem(Item &item) {
-    itemsInCharacter.push_back(item);
-}
-void Characterx::addItem(Item *item) {
-    itemsInCharacter.push_back(*item);
-    delete item;
-}
-string Characterx::longDescription()
+Character::Character(string name = "player", string description = "You are the player")
 {
-  string ret = this->description;
-  ret += "\n Item list:\n";
-  for (vector<Item>::iterator i = itemsInCharacter.begin(); i != itemsInCharacter.end(); i++)
-    ret += "\t"+ (*i).getLongDescription() + "\n";
-  return ret;
+  this->name = name;
+  this->description = description;
 }
-*/
 
+// Todo(): find a way to delete the item after adding to inventory
+void Character::addInventory(Item &item)
+{
+  inventory.push_back(item);
+}
 
+vector<Item> Character::getInventory()
+{
+  return inventory;
+}
+
+string Character::getDescription()
+{
+  // string ret = this->description;
+  // ret += "\n Item list:\n";
+  // for (vector<Item>::iterator i = itemsInCharacter.begin(); i != itemsInCharacter.end(); i++)
+  //   ret += "\t" + (*i).getLongDescription() + "\n";
+  // return ret;
+  return description;
+}

@@ -13,8 +13,9 @@ class GameModel : public QObject
 public:
     GameModel(QObject *parent = nullptr);
     const GameState &gameState();
+    void createCharacter(std::string name);
 signals:
-    void gameStateChanged(GameState *gameState);
+    void gameModelChanged(GameState *gameState);
 public slots:
     void updateGameState(Action action, std::unordered_map<std::string, std::string> params);
 

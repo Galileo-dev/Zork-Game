@@ -11,6 +11,8 @@ project(Game
 # Set the vcpkg toolchain file
 set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake")
 
+
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON) 
 
@@ -30,8 +32,8 @@ set(CONTROLLER_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/controller")
 add_library(model
         ${MODEL_DIR}/Room.cpp
         ${MODEL_DIR}/Item.cpp
-        ${MODEL_DIR}/Command.cpp
-        ${MODEL_DIR}/CommandUtils.cpp
+        # ${MODEL_DIR}/Command.cpp
+        # ${MODEL_DIR}/CommandUtils.cpp
         ${MODEL_DIR}/GameState.cpp
         ${MODEL_DIR}/GameModel.cpp
         
@@ -57,7 +59,11 @@ target_include_directories(cli_view PUBLIC ${CLI_VIEW_DIR})
 
 
 # Add the source files for the controller
-add_library(controller ${CONTROLLER_DIR}/GameController.cpp)
+add_library(controller 
+        ${CONTROLLER_DIR}/GameController.cpp
+        ${CONTROLLER_DIR}/Command.cpp
+        ${CONTROLLER_DIR}/CommandUtils.cpp
+)
 target_include_directories(controller PUBLIC ${CONTROLLER_DIR})
 
 

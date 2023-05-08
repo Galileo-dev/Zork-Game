@@ -1,5 +1,6 @@
 #include <QObject>
 #include "../model/GameModel.h"
+#include "Command.h"
 
 class GameController : public QObject
 {

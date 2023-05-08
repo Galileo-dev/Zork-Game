@@ -10,14 +10,13 @@ using std::vector;
 class Character
 {
 private:
+	string name;
 	string description;
-	vector<string> itemsInCharacter;
+	vector<Item> inventory;
 
 public:
-	void addItems(string Item);
-
-public:
-	Character(string description);
-	string shortDescription();
-	string longDescription();
+	void addInventory(Item &Item);
+	vector<Item> getInventory();
+	Character(string name = "player", string description = "You are the player");
+	string getDescription();
 };

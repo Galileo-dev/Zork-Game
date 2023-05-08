@@ -3,12 +3,15 @@
 
 #include <iostream>
 MainWindow::MainWindow(GameController *gameController, QWidget *parent)
-    : QMainWindow(parent), ui(new Ui::MainWindow), m_gameController(gameController), m_gameModel(gameController->GetGameModel())
+    : QMainWindow(parent), ui(new Ui::MainWindow)
 {
+    m_gameController = gameController;
+    m_gameModel = gameController->GetGameModel();
+
     ui->setupUi(this);
     // print debug message
     std::cout << "m_gameModel: " << m_gameModel << std::endl;
-    connect(m_gameModel, &GameModel::gameStateChanged, this, &MainWindow::updateView);
+    connect(m_gameModel, &GameModel::gameModelChanged, this, &MainWindow::updateView);
 
     // start new game
     connect(ui->startButton, &QPushButton::clicked, this, [=]()
@@ -35,9 +38,23 @@ void MainWindow::InputHandler(Action action, std::unordered_map<std::string, std
         std::cout << param.first << ": " << param.second << std::endl;
     }
     // call signal
-    m_gameController->updateGameState(action, params);
 
-    // send to controller
+    // show command ran in terminal
+    switch (action)
+    {
+    case Action::ParseCommand:
+        ui->terminalBox->append(QString::fromStdString(">" + params["input"]));
+        break;
+
+    default:
+        break;
+    }
+
+    // clear input
+    ui->terminalInput->clear();
+
+    // update game state
+    m_gameController->updateGameState(action, params);
 }
 
 void MainWindow::updateView(GameState *gameState)
@@ -45,6 +62,7 @@ void MainWindow::updateView(GameState *gameState)
     std::cout << "MainWindow::updateView()" << std::endl;
     // update view
     std::string terminalOutput = gameState->getTerminalOutput();
+
     ui->terminalBox->append(QString::fromStdString(terminalOutput));
 }
 
