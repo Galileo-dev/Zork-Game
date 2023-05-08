@@ -14,8 +14,10 @@ public:
     GameModel(QObject *parent = nullptr);
     const GameState &gameState();
     void createCharacter(std::string name);
+    string getTerminalOutput();
+    void updatedView();
 signals:
-    void gameModelChanged(GameState *gameState);
+    void gameModelChanged(GameModel *gameModel);
 public slots:
     void updateGameState(Action action, std::unordered_map<std::string, std::string> params);
 

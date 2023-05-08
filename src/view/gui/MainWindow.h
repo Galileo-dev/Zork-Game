@@ -26,6 +26,6 @@ private:
 
 private slots:
     void InputHandler(Action action, std::unordered_map<std::string, std::string> params);
-    void updateView(GameState *gameState);
+    void updateView(GameModel *gameModel);
 };
 #endif // MAINWINDOW_H

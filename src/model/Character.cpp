@@ -1,6 +1,6 @@
 #include "Character.h"
 
-Character::Character(string name = "player", string description = "You are the player")
+Character::Character(string, string)
 {
   this->name = name;
   this->description = description;

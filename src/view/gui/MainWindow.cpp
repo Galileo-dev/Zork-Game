@@ -35,7 +35,8 @@ void MainWindow::InputHandler(Action action, std::unordered_map<std::string, std
     std::cout << "params: " << std::endl;
     for (auto &param : params)
     {
-        std::cout << param.first << ": " << param.second << std::endl;
+        std::cout << param.first << ": " << param.second << ",";
+        std::cout << std::endl;
     }
     // call signal
 
@@ -57,13 +58,19 @@ void MainWindow::InputHandler(Action action, std::unordered_map<std::string, std
     m_gameController->updateGameState(action, params);
 }
 
-void MainWindow::updateView(GameState *gameState)
+// in my mind this will be used to update the view
+// the game model will have a string that refers to the
+// recent action that was taken and the view will update
+void MainWindow::updateView(GameModel *gameModel)
 {
     std::cout << "MainWindow::updateView()" << std::endl;
-    // update view
-    std::string terminalOutput = gameState->getTerminalOutput();
+
+    // terminal view
+    std::string terminalOutput = gameModel->getTerminalOutput();
 
     ui->terminalBox->append(QString::fromStdString(terminalOutput));
+
+    gameModel->updatedView();
 }
 
 MainWindow::~MainWindow()

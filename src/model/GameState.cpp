@@ -17,9 +17,24 @@ using namespace std;
 
 GameState::GameState()
 {
-
+    character = Character("Player", "This is you");
     createRooms();
     createItems();
+}
+
+string GameState::getReaction()
+{
+    return this->reaction;
+}
+
+void GameState::addReaction(string reaction)
+{
+    this->reaction += reaction + "\n";
+}
+
+void GameState::resetReaction()
+{
+    this->reaction = "";
 }
 
 void GameState::setup()
@@ -119,14 +134,7 @@ Room *GameState::getCurentRoom()
     return this->currentRoom;
 }
 
-string GameState::getTerminalOutput()
+void GameState::createCharacter(string name, string description)
 {
-    // build a string
-    string output = "";
-    output += "You are in room " + currentRoom->shortDescription() + "\n";
-    return output;
-}
-
-void GameState::createCharacter(string name)
-{
+    this->character = Character(name, description);
 }

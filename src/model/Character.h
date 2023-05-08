@@ -1,11 +1,10 @@
-
+#ifndef CHARACTER_H_
 #define CHARACTER_H_
-#include "GameState.h"
 
-#include <string>
-using namespace std;
 #include <vector>
-using std::vector;
+#include "item.h"
+
+using namespace std;
 
 class Character
 {
@@ -15,8 +14,11 @@ private:
 	vector<Item> inventory;
 
 public:
+	Character() {}
 	void addInventory(Item &Item);
 	vector<Item> getInventory();
-	Character(string name = "player", string description = "You are the player");
+	Character(string, string);
 	string getDescription();
 };
+
+#endif /*CHARACTER_H_*/

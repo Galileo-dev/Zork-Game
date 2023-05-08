@@ -32,6 +32,7 @@ set(CONTROLLER_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/controller")
 add_library(model
         ${MODEL_DIR}/Room.cpp
         ${MODEL_DIR}/Item.cpp
+        ${MODEL_DIR}/Character.cpp
         # ${MODEL_DIR}/Command.cpp
         # ${MODEL_DIR}/CommandUtils.cpp
         ${MODEL_DIR}/GameState.cpp

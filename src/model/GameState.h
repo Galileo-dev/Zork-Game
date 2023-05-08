@@ -16,14 +16,18 @@ private:
     Room *currentRoom;
     std::map<string, Item> items;
     std::map<string, Room *> rooms;
+    string reaction;
 
 public:
     GameState();
+    string getReaction();
+    void addReaction(string reaction);
+    void resetReaction();
     void go(Direction direction);
     void setup();
     void createRooms();
     void createItems();
-    void createCharacter(string name);
+    void createCharacter(string name, string description);
     void setDifficulty();
     string getTerminalOutput(); // TODO: implement this
 
