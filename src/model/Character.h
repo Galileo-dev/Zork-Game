@@ -2,7 +2,7 @@
 #define CHARACTER_H_
 
 #include <vector>
-#include "item.h"
+#include "Item.h"
 
 using namespace std;
 

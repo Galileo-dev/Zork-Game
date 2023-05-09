@@ -45,7 +45,7 @@ void GameState::setup()
 
 void GameState::pickupItem(string itemName)
 {
-    // character.addInventory(items[itemName]);
+    character.addInventory(items[itemName]);
 }
 
 void GameState::createRooms()

@@ -1,7 +1,7 @@
 #ifndef GameState_H_
 #define GameState_H_
 
-#include "item.h"
+#include "Item.h"
 #include "Room.h"
 #include "Character.h"
 #include <iostream>

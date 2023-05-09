@@ -1,4 +1,4 @@
-#include "item.h"
+#include "Item.h"
 
 Item::Item(string _identifier, string _displayName, string _description, int _weight, float _value, bool _isWeapon, bool _isQuestItem)
 {
@@ -6,6 +6,10 @@ Item::Item(string _identifier, string _displayName, string _description, int _we
     weight = _weight;
     value = _value;
     displayName = _displayName;
+    identifier = _identifier;
+    isWeapon = _isWeapon;
+    isQuestItem = _isQuestItem;
+
     /**weaponCheck(isWeapon);*/
 }
 
@@ -42,10 +46,9 @@ string Item::getDisplayName()
 
 string Item::getShortDescription()
 {
-    return description;
+    return displayName + "(" + identifier + ")";
 }
 
 string Item::getLongDescription()
 {
-    return " item(s), " + description + ".\n";
 }

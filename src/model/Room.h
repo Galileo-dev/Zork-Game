@@ -4,7 +4,7 @@
 #include <map>
 #include <string>
 #include <vector>
-#include "item.h"
+#include "Item.h"
 #include "Direction.h"
 
 using namespace std;
@@ -12,11 +12,6 @@ using std::vector;
 
 class Room
 {
-
-private:
-	string description;
-	map<Direction, Room *> exits;
-	vector<Item> itemsInRoom;
 
 public:
 	int numberOfItems();
@@ -29,7 +24,11 @@ public:
 	string displayItem();
 	int isItemInRoom(string inString);
 	string exitString();
-	void removeItemFromRoom(int location);
+
+private:
+	string description;
+	map<Direction, Room *> exits;
+	vector<Item> itemsInRoom;
 };
 
 #endif

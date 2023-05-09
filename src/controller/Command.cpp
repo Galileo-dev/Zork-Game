@@ -1,6 +1,7 @@
 #include "Command.h"
-#include "../model/Room.h"
 #include "CommandUtils.h"
+#include "../model/Room.h"
+
 #include <iostream>
 
 /**
