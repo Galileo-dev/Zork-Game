@@ -2,12 +2,13 @@
 #include "../view/gui/GameGUI.h"
 #include "../view/gui/MainWindow.h"
 #include "../model/GameState.h"
-// #include "Command.h";
+#include "Command.h"
 #include <QApplication>
 
 #include <QStyleFactory>
 #include <QTimer>
 #include <tuple>
+#include "GameController.h"
 
 int main(int argc, char *argv[])
 {
@@ -34,8 +35,26 @@ void GameController::updateGameState(Action action, std::unordered_map<std::stri
         std::cout << "GameModel::updateGameState() - ParseCommand" << std::endl;
         // m_gameState = GameState(params);
         Command command(params["input"]);
-        // auto [action, params] = command.parse();
+        auto [pAction, pParams] = command.parse();
+        action = pAction;
+        params = pParams;
+        // if (!command.validate())
+        // {
+        //     // formulate error as a string
+        //     std::string error = "Invalid command: " + params["input"];
+        //     error += command.getErrorMessage();
+        //     params = {{"error", error}};
+        // }
     }
 
-    m_gameModel.updateGameState(action, params);
+    // put the action and params into the game model
+    cout << "Action: " << action << endl;
+    cout << "Params: " << endl;
+    for (auto &param : params)
+    {
+        cout << param.first << ": " << param.second << ",";
+        cout << endl;
+    }
+
+    m_gameModel.updateGameModel(action, params);
 }

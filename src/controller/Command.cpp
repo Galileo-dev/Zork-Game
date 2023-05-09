@@ -71,39 +71,52 @@ void Command::giveSuggestions(GameState *gameState)
 /**
  * Return an action based on the command.
  */
-// tuple<Action, std::unordered_map<std::string, std::string>> Command::parse()
-// {
-// 	string commandWord = currentCommand[0];
-// 	std::unordered_map<std::string, std::string> params;
-// 	Action action = Action::Invalid;
+tuple<Action, std::unordered_map<std::string, std::string>> Command::parse()
+{
+	string commandWord = currentCommand[0];
+	std::unordered_map<std::string, std::string> params;
+	Action action = Action::InvalidCommand;
 
-// 	if (commandWord.compare("go") == 0)
-// 	{
-// 		action = Action::Go;
-// 		params["direction"] = currentCommand[1];
-// 	}
-// 	else if (commandWord.compare("take") == 0)
-// 	{
-// 		action = Action::PickupItem;
-// 		params["item"] = currentCommand[1];
-// 	}
-// 	else if (commandWord.compare("put") == 0)
-// 	{
-// 		action = Action::PickupItem;
-// 		params["item"] = currentCommand[1];
-// 	}
-// 	else if (commandWord.compare("quit") == 0)
-// 	{
-// 		action = Action::Quit;
-// 	}
-// 	else if (commandWord.compare("help") == 0)
-// 	{
-// 		action = Action::Help;
-// 	}
-// 	else
-// 	{
-// 		action = Action::Invalid;
-// 	}
+	if (commandWord.compare("go") == 0)
+	{
+		// expects a direction
+		// if (currentCommand.size() < 2)
+		// {
+		// 	action = Action::InvalidArguments;
+		// 	params["error"] = "Go where?";
+		// }
 
-// 	return std::make_tuple(action, params);
-// }
+		action = Action::Go;
+
+		params["direction"] = currentCommand[1];
+	}
+	else if (commandWord.compare("take") == 0)
+	{
+		action = Action::PickupItem;
+		params["item"] = currentCommand[1];
+	}
+	else if (commandWord.compare("put") == 0)
+	{
+		action = Action::PickupItem;
+		params["item"] = currentCommand[1];
+	}
+	else if (commandWord.compare("quit") == 0)
+	{
+		action = Action::Quit;
+	}
+	else if (commandWord.compare("help") == 0)
+	{
+		action = Action::Help;
+	}
+	else if (commandWord.compare("look") == 0)
+	{
+		action = Action::Look;
+	}
+
+	return std::make_tuple(action, params);
+}
+
+string Command::getErrorMessage()
+{
+	return currentErrorMessage;
+}

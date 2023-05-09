@@ -19,7 +19,7 @@ public:
 signals:
     void gameModelChanged(GameModel *gameModel);
 public slots:
-    void updateGameState(Action action, std::unordered_map<std::string, std::string> params);
+    void updateGameModel(Action action, std::unordered_map<std::string, std::string> params);
 
 private:
     GameState m_gameState;

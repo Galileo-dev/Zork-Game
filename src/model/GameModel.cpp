@@ -5,7 +5,7 @@ GameModel::GameModel(QObject *parent) : QObject(parent)
     cout << "GameModel::GameModel()" << endl;
 }
 
-void GameModel::updateGameState(Action action, std::unordered_map<std::string, std::string> params)
+void GameModel::updateGameModel(Action action, std::unordered_map<std::string, std::string> params)
 {
     switch (action)
     {
@@ -13,6 +13,43 @@ void GameModel::updateGameState(Action action, std::unordered_map<std::string, s
     case Action::StartGame:
         m_gameState.createCharacter(params["player_name"], "who do you think you are?");
         m_gameState.addReaction("Welcome to the game, " + params["player_name"] + "!");
+        break;
+
+    case Action::Go:
+        Direction direction;
+
+        if (params["direction"] == "north")
+        {
+            direction = Direction::NORTH;
+        }
+        else if (params["direction"] == "south")
+        {
+            direction = Direction::SOUTH;
+        }
+        else if (params["direction"] == "east")
+        {
+            direction = Direction::EAST;
+        }
+        else if (params["direction"] == "west")
+        {
+            direction = Direction::WEST;
+        }
+        else
+        {
+            m_gameState.addReaction("Invalid direction: " + params["direction"]);
+            break;
+        }
+
+        m_gameState.go(direction);
+        break;
+
+    case Action::PickupItem:
+        m_gameState.pickupItem(params["item_name"]);
+        break;
+
+    case Action::Look:
+        // m_gameState.addReaction("You are in room " + m_gameState.getCurentRoom()->shortDescription());
+        m_gameState.addReaction(m_gameState.getCurentRoom()->longDescription());
         break;
     }
 
@@ -24,7 +61,7 @@ string GameModel::getTerminalOutput()
 {
     // build a string
     string output = "";
-    output += "You are in room " + m_gameState.getCurentRoom()->shortDescription() + "\n";
+    // output += "You are in room " + m_gameState.getCurentRoom()->shortDescription() + "\n";
     output += m_gameState.getReaction() + "\n";
     return output;
 }

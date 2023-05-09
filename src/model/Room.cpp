@@ -4,6 +4,26 @@ Room::Room(string description)
     this->description = description;
 }
 
+std::string toString(Direction direction)
+{
+    switch (direction)
+    {
+    case Direction::NORTH:
+        return "north";
+        break;
+    case Direction::EAST:
+        return "east";
+        break;
+    case Direction::SOUTH:
+        return "south";
+        break;
+    case Direction::WEST:
+        return "west";
+        break;
+    }
+    return "invalid_direction: this should never happen";
+}
+
 void Room::setExits(Room *north, Room *east, Room *south, Room *west)
 {
     if (north != NULL)
@@ -23,15 +43,19 @@ string const Room::shortDescription()
 
 string Room::longDescription()
 {
-    return "room = " + description + ".\n" + displayItem() + "\nexits =" + exitString();
+    string str = "";
+    str += ("You are in room " + this->shortDescription()) + ".\n";
+    str += ("Items in room: ") + displayItem() + "\n";
+    str += ("Exits: ") + exitString() + "\n";
+    return str;
 }
-
 string Room::exitString()
 {
     string returnString = "";
     for (map<Direction, Room *>::iterator i = exits.begin(); i != exits.end(); i++)
         // Loop through map
-        returnString += " " + i->first; // access the "first" element of the pair (direction as a string)
+
+        returnString += " " + toString(i->first); // access the "first" element of the pair (direction as a string)
     return returnString;
 }
 
@@ -51,11 +75,11 @@ void Room::addItem(Item *inItem)
 
 string Room::displayItem()
 {
-    string tempString = "items in room = ";
+    string tempString = "";
     int sizeItems = (itemsInRoom.size());
     if (itemsInRoom.size() < 1)
     {
-        tempString = "no items in room";
+        tempString = "None";
     }
     else if (itemsInRoom.size() > 0)
     {

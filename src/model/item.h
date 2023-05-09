@@ -9,16 +9,20 @@ using namespace std;
 class Item
 {
 private:
-	string identifier;		// identifier
-	string description;		// this wil be the short description used in the room
-	string longDescription; // this will be the long description used when the player looks at the item
+	string identifier;
+	string displayName;
+	string description;
+	string longDescription;
 	float weight;
 	float value;
 	// TODO: add stats
 	bool isWeapon;
-	bool isQuestItem; // these cannot be dropped or stored in a chest... but have no weight
+	bool isQuestItem;
+
 public:
-	Item(string identifier, string description, int weight, float value, bool isWeapon, bool isQuestItem);
+	Item() {}
+	Item(string identifier, string displayName, string description, int weight, float value, bool isWeapon, bool isQuestItem);
+	string getDisplayName();
 	string getShortDescription();
 	string getLongDescription();
 	float getWeight();

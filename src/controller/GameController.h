@@ -1,6 +1,8 @@
+#ifndef GAMECONTROLLER_H
+#define GAMECONTROLLER_H
+
 #include <QObject>
 #include "../model/GameModel.h"
-#include "Command.h"
 
 class GameController : public QObject
 {
@@ -15,3 +17,5 @@ public slots:
 private:
     GameModel m_gameModel;
 };
+
+#endif // GAMECONTROLLER_H

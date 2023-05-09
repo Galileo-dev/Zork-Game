@@ -3,8 +3,8 @@
 
 #include <string>
 #include <vector>
-// #include "../model/Action.h"
 #include "../model/GameState.h"
+#include "../model/Action.h"
 #include <unordered_map>
 #include <tuple>
 
@@ -15,6 +15,7 @@ class Command
 private:
 	std::vector<string> currentCommand;
 	std::vector<string> validCommands;
+	string currentErrorMessage;
 
 public:
 	Command(string command);
@@ -23,10 +24,12 @@ public:
 	bool isUnknown();
 	bool hasSecondWord();
 	void giveSuggestions(GameState *gameState);
+	string getErrorMessage();
 	void giveUsage();
 	bool validate();
+
 	// parse returns [Action, params]
-	// tuple<Action, std::unordered_map<std::string, std::string>> parse();
+	tuple<Action, std::unordered_map<std::string, std::string>> parse();
 };
 
 #endif /*COMMAND_H_*/

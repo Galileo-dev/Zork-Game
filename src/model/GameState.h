@@ -28,6 +28,7 @@ public:
     void createRooms();
     void createItems();
     void createCharacter(string name, string description);
+    void pickupItem(string itemName);
     void setDifficulty();
     string getTerminalOutput(); // TODO: implement this
 
