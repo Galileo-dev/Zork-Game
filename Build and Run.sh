@@ -9,7 +9,7 @@ cd build
 cmake ..
 
 # run make to build the project
-make
+make -j4
 
 #  run
 # only run if the build succeeded
