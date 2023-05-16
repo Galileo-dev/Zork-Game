@@ -26,16 +26,6 @@ GameController::GameController(QObject *parent) : QObject(parent)
 void GameController::guiUpdateGameModel(UI_INPUT ui_input, std::unordered_map<std::string, std::string> params)
 {
 
-#ifdef DEBUG
-    // put the action and params into the game model
-    cout << "Input: " << ui_input << endl;
-    cout << "Params: " << endl;
-    for (auto &param : params)
-    {
-        cout << param.first << ": " << param.second << ",";
-        cout << endl;
-    }
-#endif
     Action action;
     switch (ui_input)
     {

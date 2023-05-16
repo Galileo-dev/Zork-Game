@@ -7,12 +7,25 @@ GameModel::GameModel(QObject *parent) : QObject(parent)
 
 void GameModel::updateGameModel(Action action, std::unordered_map<std::string, std::string> params)
 {
+#ifdef DEBUG_LOG
+    // put the action and params into the game model
+    cout << "GameModel::updateGameModel()" << endl;
+    cout << "Input: " << static_cast<std::underlying_type<Action>::type>(action) << endl;
+    cout << "Params: " << endl;
+    for (auto &param : params)
+    {
+        cout << param.first << ": " << param.second << ",";
+        cout << endl;
+    }
+#endif
+
     switch (action)
     {
 
     case Action::StartGame:
-        m_gameState.createCharacter(params["player_name"], "who do you think you are?");
+        m_gameState.createCharacter(params["player_name"], "a fierce zork hunter, travels on the back of camel named Steve moving from village to village slaying the helpless zorks and that is how he got his name, Zork Hunter.");
         m_gameState.addReaction("Welcome to the game, " + params["player_name"] + "!");
+        m_gameState.addReaction("You are a" + m_gameState.getCharacter()->getDescription());
         break;
 
     case Action::Go:
@@ -40,6 +53,8 @@ void GameModel::updateGameModel(Action action, std::unordered_map<std::string, s
             break;
         }
 
+        m_gameState.addReaction("You walk " + params["direction"]);
+
         m_gameState.go(direction);
         break;
 
@@ -55,17 +70,17 @@ void GameModel::updateGameModel(Action action, std::unordered_map<std::string, s
 
     // update view
     emit gameModelChanged(this);
-}
-
-void GameModel::updatedView()
-{
-    // reset the reaction string
     m_gameState.resetReaction();
 }
 
 string GameModel::getReaction()
 {
     return m_gameState.getReaction();
+}
+
+Character *GameModel::getCharacter()
+{
+    return m_gameState.getCharacter();
 }
 
 const GameState &GameModel::gameState()

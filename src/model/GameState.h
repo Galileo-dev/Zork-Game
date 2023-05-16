@@ -21,6 +21,7 @@ private:
 public:
     GameState();
     string getReaction();
+    Character *getCharacter();
     void addReaction(string reaction);
     void resetReaction();
     void go(Direction direction);

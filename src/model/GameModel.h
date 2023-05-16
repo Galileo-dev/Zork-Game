@@ -14,8 +14,8 @@ public:
     GameModel(QObject *parent = nullptr);
     const GameState &gameState();
     void createCharacter(std::string name);
-    void updatedView();
     string getReaction();
+    Character *getCharacter();
 signals:
     void gameModelChanged(GameModel *gameModel);
 public slots:

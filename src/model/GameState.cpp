@@ -29,7 +29,14 @@ string GameState::getReaction()
 
 void GameState::addReaction(string reaction)
 {
-    this->reaction += reaction + "\n";
+    if (this->reaction == "")
+    {
+        this->reaction = reaction;
+    }
+    else
+    {
+        this->reaction += "\n" + reaction;
+    }
 }
 
 void GameState::resetReaction()
@@ -134,6 +141,11 @@ void GameState::go(Direction direction)
 Room *GameState::getCurentRoom()
 {
     return this->currentRoom;
+}
+
+Character *GameState::getCharacter()
+{
+    return &this->character;
 }
 
 void GameState::createCharacter(string name, string description)

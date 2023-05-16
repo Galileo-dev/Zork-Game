@@ -9,7 +9,7 @@ project(Game
         )
 
 # debug prints
-# add_compile_definitions(DEBUG)
+add_compile_definitions(DEBUG_LOG)
 
 # Set the vcpkg toolchain file
 set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake")

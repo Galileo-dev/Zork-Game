@@ -14,7 +14,7 @@ MainWindow::MainWindow(GameController *gameController, QWidget *parent)
     // ========================== Connecting UI to GameController ==========================
 
     connect(m_gameModel, &GameModel::gameModelChanged, this, &MainWindow::updateGUIView);
-
+    connect(m_gameModel, &GameModel::gameModelChanged, this, &MainWindow::updateCLIView);
     // start new game
     connect(ui->startButton, &QPushButton::clicked, this, [=]()
             {
@@ -37,10 +37,9 @@ MainWindow::MainWindow(GameController *gameController, QWidget *parent)
 
 void MainWindow::InputHandler(UI_INPUT ui_input, std::unordered_map<std::string, std::string> params)
 {
-
-#ifdef DEBUG
+#ifdef DEBUG_LOG
     std::cout << "MainWindow::InputHandler()" << std::endl;
-    std::cout << "input: " << ui_input << std::endl;
+    std::cout << "input: " << static_cast<std::underlying_type<UI_INPUT>::type>(ui_input) << std::endl;
     std::cout << "params: " << std::endl;
     for (auto &param : params)
     {
@@ -77,7 +76,6 @@ void MainWindow::InputHandler(UI_INPUT ui_input, std::unordered_map<std::string,
 // recent action that was taken and the view will update
 void MainWindow::updateGUIView(GameModel *gameModel)
 {
-    gameModel->updatedView();
 }
 
 string MainWindow::getTerminalOutput(GameModel *gameModel)
@@ -91,10 +89,8 @@ string MainWindow::getTerminalOutput(GameModel *gameModel)
 
 void MainWindow::updateCLIView(GameModel *gameModel)
 {
-    std::string terminalOutput = this->getTerminalOutput(gameModel);
+    std::string terminalOutput = getTerminalOutput(gameModel);
     ui->terminalBox->append(QString::fromStdString(terminalOutput));
-
-    gameModel->updatedView();
 }
 
 MainWindow::~MainWindow()
