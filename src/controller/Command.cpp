@@ -68,7 +68,6 @@ void Command::giveSuggestions(GameState *gameState)
 		cout << endl;
 	}
 }
-
 /**
  * Return an action based on the command.
  */
@@ -113,6 +112,14 @@ tuple<Action, std::unordered_map<std::string, std::string>> Command::parse()
 	{
 		action = Action::Look;
 	}
+
+	// if (!command.validate())
+	// {
+	// 	// formulate error as a string
+	// 	std::string error = "Invalid command: " + params["input"];
+	// 	error += command.getErrorMessage();
+	// 	params = {{"error", error}};
+	// }
 
 	return std::make_tuple(action, params);
 }

@@ -21,38 +21,54 @@ int main(int argc, char *argv[])
 
 GameController::GameController(QObject *parent) : QObject(parent)
 {
-    // GUI Elements
-    // m_gameModel = new GameModel();
-    cout << "GameController::GameController()" << endl;
 }
 
-void GameController::updateGameState(Action action, std::unordered_map<std::string, std::string> params)
+void GameController::guiUpdateGameModel(UI_INPUT ui_input, std::unordered_map<std::string, std::string> params)
 {
-    if (action == Action::ParseCommand)
-    {
-        std::cout << "GameModel::updateGameState() - ParseCommand" << std::endl;
-        // m_gameState = GameState(params);
-        Command command(params["input"]);
-        auto [pAction, pParams] = command.parse();
-        action = pAction;
-        params = pParams;
-        // if (!command.validate())
-        // {
-        //     // formulate error as a string
-        //     std::string error = "Invalid command: " + params["input"];
-        //     error += command.getErrorMessage();
-        //     params = {{"error", error}};
-        // }
-    }
 
+#ifdef DEBUG
     // put the action and params into the game model
-    cout << "Action: " << action << endl;
+    cout << "Input: " << ui_input << endl;
     cout << "Params: " << endl;
     for (auto &param : params)
     {
         cout << param.first << ": " << param.second << ",";
         cout << endl;
     }
+#endif
+    Action action;
+    switch (ui_input)
+    {
+    case UI_INPUT::CommandEntered:
+        cliUpdateGameModel(params["input"]);
+        return;
+        break;
+
+    case UI_INPUT::Go:
+        action = Action::Go;
+        break;
+    case UI_INPUT::Look:
+        action = Action::Look;
+        break;
+    case UI_INPUT::StartGame:
+        action = Action::StartGame;
+        break;
+
+    default:
+        perror("Invalid UI_INPUT");
+        break;
+    }
+
+    m_gameModel.updateGameModel(action, params);
+}
+
+void GameController::cliUpdateGameModel(string commandString)
+{
+
+    Command command(commandString);
+    auto [pAction, pParams] = command.parse();
+    Action action = pAction;
+    unordered_map<string, string> params = pParams;
 
     m_gameModel.updateGameModel(action, params);
 }

@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 #include "Item.h"
-#include "Direction.h"
+#include "Enum.h"
 
 using namespace std;
 using std::vector;

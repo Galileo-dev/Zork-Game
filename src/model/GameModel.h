@@ -4,7 +4,7 @@
 #include <QObject>
 #include <unordered_map>
 #include "../model/GameState.h"
-#include "../model/Action.h"
+#include "../model/Enum.h"
 
 class GameModel : public QObject
 {
@@ -14,8 +14,8 @@ public:
     GameModel(QObject *parent = nullptr);
     const GameState &gameState();
     void createCharacter(std::string name);
-    string getTerminalOutput();
     void updatedView();
+    string getReaction();
 signals:
     void gameModelChanged(GameModel *gameModel);
 public slots:

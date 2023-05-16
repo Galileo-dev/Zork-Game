@@ -8,11 +8,11 @@ project(Game
         LANGUAGES CXX
         )
 
+# debug prints
+# add_compile_definitions(DEBUG)
+
 # Set the vcpkg toolchain file
 set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake")
-
-
-
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON) 
 

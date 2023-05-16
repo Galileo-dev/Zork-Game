@@ -57,19 +57,15 @@ void GameModel::updateGameModel(Action action, std::unordered_map<std::string, s
     emit gameModelChanged(this);
 }
 
-string GameModel::getTerminalOutput()
-{
-    // build a string
-    string output = "";
-    // output += "You are in room " + m_gameState.getCurentRoom()->shortDescription() + "\n";
-    output += m_gameState.getReaction() + "\n";
-    return output;
-}
-
 void GameModel::updatedView()
 {
     // reset the reaction string
     m_gameState.resetReaction();
+}
+
+string GameModel::getReaction()
+{
+    return m_gameState.getReaction();
 }
 
 const GameState &GameModel::gameState()

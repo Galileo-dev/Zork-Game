@@ -2,11 +2,11 @@
 
 Item::Item(string _identifier, string _displayName, string _description, int _weight, float _value, bool _isWeapon, bool _isQuestItem)
 {
+    identifier = _identifier;
+    displayName = _displayName;
     description = _description;
     weight = _weight;
     value = _value;
-    displayName = _displayName;
-    identifier = _identifier;
     isWeapon = _isWeapon;
     isQuestItem = _isQuestItem;
 

@@ -4,7 +4,8 @@
 #include <string>
 #include <vector>
 #include "../model/GameState.h"
-#include "../model/Action.h"
+#include "../model/Enum.h"
+#include "Enum.h"
 #include <unordered_map>
 #include <tuple>
 

@@ -1,5 +1,6 @@
 #include "MainWindow.h"
 #include "./ui_MainWindow.h"
+#include "../../controller/Enum.h"
 
 #include <iostream>
 MainWindow::MainWindow(GameController *gameController, QWidget *parent)
@@ -9,65 +10,88 @@ MainWindow::MainWindow(GameController *gameController, QWidget *parent)
     m_gameModel = gameController->GetGameModel();
 
     ui->setupUi(this);
-    // print debug message
-    std::cout << "m_gameModel: " << m_gameModel << std::endl;
-    connect(m_gameModel, &GameModel::gameModelChanged, this, &MainWindow::updateView);
+
+    // ========================== Connecting UI to GameController ==========================
+
+    connect(m_gameModel, &GameModel::gameModelChanged, this, &MainWindow::updateGUIView);
 
     // start new game
     connect(ui->startButton, &QPushButton::clicked, this, [=]()
             {
                 unordered_map<string, string> params = {{"difficulty", ui->modeSelectionInput->currentText().toStdString()}, {"player_name", ui->characterNameInput->text().toStdString()}};
-                 InputHandler(Action::StartGame, params); });
+                 InputHandler(UI_INPUT::StartGame, params); });
 
     // command line input
     connect(ui->terminalInput, &QLineEdit::returnPressed, this, [=]()
             {
         std::string input = ui->terminalInput->text().toStdString();
-        InputHandler(Action::ParseCommand, {{"input", input}}); });
+        ui->terminalInput->clear();
+        ui->terminalBox->append(QString::fromStdString(">" + input));
+        InputHandler(UI_INPUT::CommandEntered, {{"input", input}}); });
+
+    // north button
+    connect(ui->northButton, &QPushButton::clicked, this, [=]()
+            { InputHandler(UI_INPUT::Go, {{"direction", "north"}}); });
+    // ====================================================================================
 }
 
-void MainWindow::InputHandler(Action action, std::unordered_map<std::string, std::string> params)
+void MainWindow::InputHandler(UI_INPUT ui_input, std::unordered_map<std::string, std::string> params)
 {
+
+#ifdef DEBUG
     std::cout << "MainWindow::InputHandler()" << std::endl;
-    // action
-    std::cout << "action: " << action << std::endl;
-    // params
+    std::cout << "input: " << ui_input << std::endl;
     std::cout << "params: " << std::endl;
     for (auto &param : params)
     {
         std::cout << param.first << ": " << param.second << ",";
         std::cout << std::endl;
     }
+#endif
+
+    m_gameController->guiUpdateGameModel(ui_input, params);
     // call signal
 
     // show command ran in terminal
-    switch (action)
-    {
-    case Action::ParseCommand:
-        ui->terminalBox->append(QString::fromStdString(">" + params["input"]));
-        break;
+    // switch (ui_input)
+    // {
+    // case UI_INPUT::ParseCommand:
+    //     ui->terminalBox->append(QString::fromStdString(">" + params["input"]));
+    //     break;
 
-    default:
-        break;
-    }
+    // case Action::StartGame:
+    //     ui->stackedWidget->setCurrentIndex(1);
+    //     break;
+    // default:
+    //     break;
+    // }
 
     // clear input
-    ui->terminalInput->clear();
+    // ui->terminalInput->clear();
 
     // update game state
-    m_gameController->updateGameState(action, params);
 }
 
 // in my mind this will be used to update the view
 // the game model will have a string that refers to the
 // recent action that was taken and the view will update
-void MainWindow::updateView(GameModel *gameModel)
+void MainWindow::updateGUIView(GameModel *gameModel)
 {
-    std::cout << "MainWindow::updateView()" << std::endl;
+    gameModel->updatedView();
+}
 
-    // terminal view
-    std::string terminalOutput = gameModel->getTerminalOutput();
+string MainWindow::getTerminalOutput(GameModel *gameModel)
+{
+    // build a string
+    string output = "";
+    // output += "You are in room " + m_gameState.getCurentRoom()->shortDescription() + "\n";
+    output += gameModel->getReaction() + "\n";
+    return output;
+}
 
+void MainWindow::updateCLIView(GameModel *gameModel)
+{
+    std::string terminalOutput = this->getTerminalOutput(gameModel);
     ui->terminalBox->append(QString::fromStdString(terminalOutput));
 
     gameModel->updatedView();
