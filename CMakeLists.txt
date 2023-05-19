@@ -35,6 +35,7 @@ add_library(model
         ${MODEL_DIR}/Character.cpp
         ${MODEL_DIR}/GameState.cpp
         ${MODEL_DIR}/GameModel.cpp
+        ${MODEL_DIR}/Utils.cpp
         
 )
 

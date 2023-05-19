@@ -10,25 +10,42 @@
 using namespace std;
 using std::vector;
 
-class Room
+class IRoom
 {
-
 public:
-	int numberOfItems();
-	Room(string description);
-	void setExits(Room *north, Room *east, Room *south, Room *west);
-	string const shortDescription();
-	string longDescription();
-	Room *getRoom(Direction direction);
-	void addItem(Item *inItem);
-	string displayItem();
-	int isItemInRoom(string inString);
-	string exitString();
+	// all rooms exits
+	virtual void Room(string description) = 0;
+	virtual string const shortDescription() = 0;
+	virtual string longDescription() = 0;
+	virtual ~IRoom() {}
 
 private:
 	string description;
-	map<Direction, Room *> exits;
-	vector<Item> itemsInRoom;
+};
+
+class ExitRoom
+{
+public:
+	void setExits(IRoom *north, IRoom *east, IRoom *south, IRoom *west);
+	IRoom *getRoom(Direction direction);
+	string exitString();
+
+private:
+	map<Direction, IRoom *> exits;
+};
+
+class ItemRoom : public IRoom, public ExitRoom
+
+{
+public:
+	int numberOfItems();
+	void addItem(Item *inItem);
+	void removeItem(Item *inItem);
+	string displayItem();
+	int isItemInRoom(string inString);
+
+private:
+	vector<Item *> itemsInRoom;
 };
 
 #endif

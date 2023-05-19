@@ -41,6 +41,11 @@ void GameController::guiUpdateGameModel(UI_INPUT ui_input, std::unordered_map<st
         action = Action::Look;
         break;
     case UI_INPUT::StartGame:
+        if (params["difficulty"] == "Normal (Recommended)")
+        {
+            params["difficulty"] = "Normal";
+        }
+
         action = Action::StartGame;
         break;
 

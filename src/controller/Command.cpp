@@ -51,11 +51,11 @@ void Command::giveUsage()
 /**
  * Print out suggestions for the command.
  */
-void Command::giveSuggestions(GameState *gameState)
+void Command::giveSuggestions(GameModel *gameModel)
 {
 	string commandWord = currentCommand[0];
 
-	Room *currentRoom = gameState->getCurentRoom();
+	Room *currentRoom = gameModel->getCurentRoom();
 	if (commandWord.compare("go") == 0)
 	{
 		cout << "direction: ";
@@ -93,12 +93,12 @@ tuple<Action, std::unordered_map<std::string, std::string>> Command::parse()
 	else if (commandWord.compare("take") == 0)
 	{
 		action = Action::PickupItem;
-		params["item"] = currentCommand[1];
+		params["item_name"] = currentCommand[1];
 	}
-	else if (commandWord.compare("put") == 0)
+	else if (commandWord.compare("drop") == 0)
 	{
-		action = Action::PickupItem;
-		params["item"] = currentCommand[1];
+		action = Action::DropItem;
+		params["item_name"] = currentCommand[1];
 	}
 	else if (commandWord.compare("quit") == 0)
 	{
@@ -111,6 +111,16 @@ tuple<Action, std::unordered_map<std::string, std::string>> Command::parse()
 	else if (commandWord.compare("look") == 0)
 	{
 		action = Action::Look;
+	}
+	else if (commandWord.compare("inventory") == 0)
+	{
+		action = Action::ShowInventory;
+	}
+	else if (commandWord.compare("start") == 0)
+	{
+		action = Action::StartGame;
+		params["player_name"] = currentCommand[1];
+		params["difficulty"] = currentCommand[2];
 	}
 
 	// if (!command.validate())

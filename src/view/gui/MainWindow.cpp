@@ -32,6 +32,16 @@ MainWindow::MainWindow(GameController *gameController, QWidget *parent)
     // north button
     connect(ui->northButton, &QPushButton::clicked, this, [=]()
             { InputHandler(UI_INPUT::Go, {{"direction", "north"}}); });
+    // south button
+    connect(ui->southButton, &QPushButton::clicked, this, [=]()
+            { InputHandler(UI_INPUT::Go, {{"direction", "south"}}); });
+    // east button
+    connect(ui->eastButton, &QPushButton::clicked, this, [=]()
+            { InputHandler(UI_INPUT::Go, {{"direction", "east"}}); });
+    // west button
+    connect(ui->westButton, &QPushButton::clicked, this, [=]()
+            { InputHandler(UI_INPUT::Go, {{"direction", "west"}}); });
+
     // ====================================================================================
 }
 
@@ -76,6 +86,11 @@ void MainWindow::InputHandler(UI_INPUT ui_input, std::unordered_map<std::string,
 // recent action that was taken and the view will update
 void MainWindow::updateGUIView(GameModel *gameModel)
 {
+    // if the character is created then we can start the game
+    if (gameModel->getCharacter() != nullptr)
+    {
+        ui->stackedWidget->setCurrentIndex(1);
+    }
 }
 
 string MainWindow::getTerminalOutput(GameModel *gameModel)
@@ -83,7 +98,7 @@ string MainWindow::getTerminalOutput(GameModel *gameModel)
     // build a string
     string output = "";
     // output += "You are in room " + m_gameState.getCurentRoom()->shortDescription() + "\n";
-    output += gameModel->getReaction() + "\n";
+    output += gameModel->getReaction();
     return output;
 }
 

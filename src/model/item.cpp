@@ -1,4 +1,6 @@
 #include "Item.h"
+#include <iomanip>
+#include "Utils.h"
 
 Item::Item(string _identifier, string _displayName, string _description, int _weight, float _value, bool _isWeapon, bool _isQuestItem)
 {
@@ -51,4 +53,6 @@ string Item::getShortDescription()
 
 string Item::getLongDescription()
 {
+    return displayName +
+           "(" + identifier + "):\n         description: " + description + "\n         weight: " + floatToString(weight) + "kg" + "\n         price: " + floatToString(value) + "zs"; // Use std::to_string() instead of to_string()
 }

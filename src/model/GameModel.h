@@ -12,17 +12,18 @@ class GameModel : public QObject
 
 public:
     GameModel(QObject *parent = nullptr);
-    const GameState &gameState();
-    void createCharacter(std::string name);
+    const GameState *gameState();
     string getReaction();
     Character *getCharacter();
+    Room *getCurentRoom();
+    void startGame(Character *character, Difficulty difficulty);
 signals:
     void gameModelChanged(GameModel *gameModel);
 public slots:
     void updateGameModel(Action action, std::unordered_map<std::string, std::string> params);
 
 private:
-    GameState m_gameState;
+    GameState *m_gameState;
 };
 
 #endif // GAME_MODEL_H

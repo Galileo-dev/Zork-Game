@@ -1,9 +1,11 @@
+#!/bin/sh
+
 # start by removing the old release
 rm -rf Release
 
 
 # go into the build directory
-cd build
+cd build || exit
 
 # run cmake to generate the build files
 cmake ..

@@ -1,4 +1,5 @@
 #include "Room.h"
+#include <algorithm>
 Room::Room(string description)
 {
     this->description = description;
@@ -68,9 +69,24 @@ Room *Room::getRoom(Direction direction)
 }
 void Room::addItem(Item *inItem)
 {
-    // cout <<endl;
-    // cout << "Just added" + inItem->getLongDescription();
-    itemsInRoom.push_back(*inItem);
+    itemsInRoom.push_back(inItem);
+}
+
+void Room::removeItem(Item *inItem)
+{
+    // print the address of the item
+    cout << "Address of item: " << inItem << endl;
+    // print the address of the item in the vector
+    cout << "Address of item in vector: " << itemsInRoom[0] << endl;
+    auto it = std::find(itemsInRoom.begin(), itemsInRoom.end(), inItem);
+    if (it != itemsInRoom.end())
+    {
+        itemsInRoom.erase(it);
+    }
+    else
+    {
+        cout << "Item not found in room" << endl;
+    }
 }
 
 string Room::displayItem()
@@ -86,7 +102,7 @@ string Room::displayItem()
         int x = (0);
         for (int n = sizeItems; n > 0; n--)
         {
-            tempString = tempString + itemsInRoom[x].getShortDescription() + "  ";
+            tempString = tempString + itemsInRoom[x]->getShortDescription() + "  ";
             x++;
         }
     }
@@ -111,7 +127,7 @@ int Room::isItemInRoom(string inString)
         for (int n = sizeItems; n > 0; n--)
         {
             // compare inString with short description
-            int tempFlag = inString.compare(itemsInRoom[x].getShortDescription());
+            int tempFlag = inString.compare(itemsInRoom[x]->getShortDescription());
             if (tempFlag == 0)
             {
                 itemsInRoom.erase(itemsInRoom.begin() + x);

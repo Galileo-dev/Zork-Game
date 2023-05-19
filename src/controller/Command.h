@@ -3,7 +3,7 @@
 
 #include <string>
 #include <vector>
-#include "../model/GameState.h"
+#include "../model/GameModel.h"
 #include "../model/Enum.h"
 #include "Enum.h"
 #include <unordered_map>
@@ -24,7 +24,7 @@ public:
 	string getCommandWord();
 	bool isUnknown();
 	bool hasSecondWord();
-	void giveSuggestions(GameState *gameState);
+	void giveSuggestions(GameModel *gameModel);
 	string getErrorMessage();
 	void giveUsage();
 	bool validate();

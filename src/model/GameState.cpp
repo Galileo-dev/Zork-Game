@@ -17,14 +17,18 @@ using namespace std;
 
 GameState::GameState()
 {
-    character = Character("Player", "This is you");
+#ifdef DEBUG_LOG
+    Character *character = new Character("Galileo", "a fierce zork hunter, travels on the back of camel named Steve moving from village to village slaying the helpless zorks and that is how he got his name, Zork Hunter.");
+    this->setCharacter(character);
+    this->setDifficulty(Difficulty::MEDIUM);
+    this->addReaction("Welcome to the game, Galileo!");
+    this->addReaction("You are " + this->character->getDescription());
+    this->isGameStarted = true;
+
+#endif
+
     createRooms();
     createItems();
-}
-
-string GameState::getReaction()
-{
-    return this->reaction;
 }
 
 void GameState::addReaction(string reaction)
@@ -52,7 +56,14 @@ void GameState::setup()
 
 void GameState::pickupItem(string itemName)
 {
-    character.addInventory(items[itemName]);
+    character->addInventory(items[itemName]);
+    currentRoom->removeItem(items[itemName]);
+}
+
+void GameState::dropItem(string itemName)
+{
+    character->removeInventory(items[itemName]);
+    currentRoom->addItem(items[itemName]);
 }
 
 void GameState::createRooms()
@@ -110,14 +121,14 @@ void GameState::createItems()
     // using camel case for the name
 
     // a sword
-    items["zork_slayer"] = Item("zork_slayer", "Zork Slayer", "a sword forged from the bones of a zork", 10, 400, true, false);
+    items["zork_slayer"] = new Item("zork_slayer", "Zork Slayer", "a sword forged from the bones of a zork", 10, 400, true, false);
     // a shield
-    items["zork_shield"] = Item("zork_shield", "Zork Shield", "a shield crafted from the skin of a zork", 20, 500, true, false);
+    items["zork_shield"] = new Item("zork_shield", "Zork Shield", "a shield crafted from the skin of a zork", 20, 500, true, false);
     // a key
-    items["zork_key"] = Item("zork_key", "Zork Key", "a key shaped from a tooth of a zork", 30, 100, true, false);
+    items["zork_key"] = new Item("zork_key", "Zork Key", "a key shaped from a tooth of a zork", 30, 100, true, false);
 
     Room *a = this->rooms["a"];
-    a->addItem(&items["zork_slayer"]);
+    a->addItem(items["zork_slayer"]);
 
     // Room *b = &this->rooms["b"];
     // b->addItem(new Item("xx", 3, 33));
@@ -138,17 +149,12 @@ void GameState::go(Direction direction)
     }
 }
 
-Room *GameState::getCurentRoom()
+void GameState::setCharacter(Character *character)
 {
-    return this->currentRoom;
+    this->character = character;
 }
 
-Character *GameState::getCharacter()
+void GameState::setDifficulty(Difficulty difficulty)
 {
-    return &this->character;
-}
-
-void GameState::createCharacter(string name, string description)
-{
-    this->character = Character(name, description);
+    this->difficulty = difficulty;
 }

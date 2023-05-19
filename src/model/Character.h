@@ -11,13 +11,15 @@ class Character
 private:
 	string name;
 	string description;
-	vector<Item> inventory;
+	vector<Item *> inventory;
 
 public:
 	Character() {}
-	void addInventory(Item &Item);
-	vector<Item> getInventory();
-	Character(string, string);
+	string getInventoryDescription();
+	void addInventory(Item *Item);
+	void removeInventory(Item *Item);
+	vector<Item *> getInventory();
+	Character(string name, string description);
 	string getDescription();
 };
 

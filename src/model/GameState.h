@@ -12,28 +12,37 @@ using namespace std;
 class GameState
 {
 private:
-    Character character;
+    Character *character = nullptr;
     Room *currentRoom;
-    std::map<string, Item> items;
+    std::map<string, Item *> items;
     std::map<string, Room *> rooms;
     string reaction;
+    bool isGameStarted = false;
+    Difficulty difficulty;
+    // friendship makes the dream work
+    friend class GameModel;
 
 public:
     GameState();
-    string getReaction();
-    Character *getCharacter();
+    void setCharacter(Character *character);
+    void setDifficulty(Difficulty difficulty);
+
+    // not need as we have friends now!
+    // string getReaction();
+    // Character *getCharacter();
+    // Room *getCurentRoom();
+
     void addReaction(string reaction);
     void resetReaction();
     void go(Direction direction);
     void setup();
     void createRooms();
     void createItems();
-    void createCharacter(string name, string description);
     void pickupItem(string itemName);
+    void dropItem(string itemName);
     void setDifficulty();
     string getTerminalOutput(); // TODO: implement this
 
-    Room *getCurentRoom();
     vector<Item> *getAvailableItems();
 };
 
