@@ -15,6 +15,7 @@ public:
     const GameState *gameState();
     string getReaction();
     Character *getCharacter();
+    GameState *getGameState();
     IRoom *getCurentRoom();
     void startGame(Character *character, Difficulty difficulty);
 signals:

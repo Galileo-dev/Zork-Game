@@ -9,8 +9,7 @@ using namespace std;
 class Character
 {
 private:
-	string name;
-	string description;
+		string description;
 	vector<Item *> inventory;
 
 public:
@@ -21,6 +20,9 @@ public:
 	vector<Item *> getInventory();
 	Character(string name, string description);
 	string getDescription();
+
+	friend class GameModel;
+	string name;
 };
 
 #endif /*CHARACTER_H_*/

@@ -98,6 +98,18 @@ IRoom *ExitRoom::getRoom(Direction direction)
         return NULL;
     return next->second;
 }
+
+void ExitRoom::lockAllExits()
+{
+    lockedExits = exits;
+    exits.clear();
+}
+
+void ExitRoom::unlockAllExits()
+{
+    exits = lockedExits;
+}
+
 void ItemRoom::addItem(Item *inItem)
 {
     itemsInRoom.push_back(inItem);
@@ -168,4 +180,45 @@ int ItemRoom::isItemInRoom(string inString)
         }
     }
     return -1;
+}
+
+string StoryRoom::getStoryEvent()
+{
+    return storyEvent;
+}
+
+void StoryRoom::setStoryEvent(string storyEvent)
+{
+    this->storyEvent = storyEvent;
+}
+
+RiddleRoom::RiddleRoom(string description) : ItemRoom(description)
+{
+}
+
+string RiddleRoom::getRiddle()
+{
+    return riddle;
+}
+
+void RiddleRoom::setRiddle(string riddle)
+{
+    this->riddle = riddle;
+}
+
+void RiddleRoom::setAnswer(string answer)
+{
+    this->answer = answer;
+}
+
+bool RiddleRoom::checkAnswer(string answer)
+{
+    if (answer == this->answer || answer == "clothinglabels")
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }

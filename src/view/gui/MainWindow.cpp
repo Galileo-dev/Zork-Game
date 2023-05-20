@@ -95,6 +95,7 @@ void MainWindow::updateGUIView(GameModel *gameModel)
     // if the character is created then we can start the game
     if (gameModel->getCharacter() != nullptr)
     {
+        // do character stuff in here
         ui->stackedWidget->setCurrentIndex(1);
 
         // update player inventory list
@@ -122,6 +123,28 @@ void MainWindow::updateGUIView(GameModel *gameModel)
             }
         }
     }
+
+    // disable buttons if there is no room in that direction
+    // check it has exits
+    ExitRoom *exitRoom = dynamic_cast<ExitRoom *>(gameModel->getCurentRoom());
+    if (exitRoom == nullptr)
+    {
+        ui->northButton->setEnabled(false);
+        ui->southButton->setEnabled(false);
+        ui->eastButton->setEnabled(false);
+        ui->westButton->setEnabled(false);
+    }
+    else
+    {
+
+        ui->northButton->setEnabled(exitRoom->getRoom(Direction::NORTH) != NULL);
+        ui->southButton->setEnabled(exitRoom->getRoom(Direction::SOUTH) != NULL);
+        ui->eastButton->setEnabled(exitRoom->getRoom(Direction::EAST) != NULL);
+        ui->westButton->setEnabled(exitRoom->getRoom(Direction::WEST) != NULL);
+    }
+
+    // update the text box
+    ui->outputText->append(QString::fromStdString(gameModel->getReaction()));
 }
 
 string MainWindow::getTerminalOutput(GameModel *gameModel)

@@ -11,11 +11,12 @@ project(Game
 # debug prints
 add_compile_definitions(DEBUG_LOG)
 
+
+
 # Set the vcpkg toolchain file
 set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake")
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON) 
-
 # set(CMAKE_EXE_LINKER_FLAGS_INIT "-fuse-ld=lld")
 # set(CMAKE_MODULE_LINKER_FLAGS_INIT "-fuse-ld=lld")
 # set(CMAKE_SHARED_LINKER_FLAGS_INIT "-fuse-ld=lld")
@@ -55,7 +56,6 @@ target_link_libraries(gui_view PRIVATE model Qt6::Widgets)
 
 # Add the source files for the controller
 add_library(controller 
-        ${CONTROLLER_DIR}/GameController.cpp
         ${CONTROLLER_DIR}/Command.cpp
 )
 target_include_directories(controller PUBLIC ${CONTROLLER_DIR})

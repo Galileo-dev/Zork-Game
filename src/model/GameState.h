@@ -21,6 +21,7 @@ private:
     Difficulty difficulty;
     // friendship makes the dream work
     friend class GameModel;
+    int tries = 3;
 
 public:
     GameState();
@@ -35,12 +36,13 @@ public:
     void addReaction(string reaction);
     void resetReaction();
     void go(Direction direction);
-    void setup();
     void createRooms();
     void createItems();
     void pickupItem(string itemName);
     void dropItem(string itemName);
     void setDifficulty();
+    void solveRiddle(string answer);
+    void checkGameCompleted();
     string getTerminalOutput(); // TODO: implement this
 
     vector<Item> *getAvailableItems();

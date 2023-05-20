@@ -19,6 +19,15 @@ public:
     MainWindow(GameController *GameController, QWidget *parent = nullptr);
     ~MainWindow();
 
+protected:
+    void showEvent(QShowEvent *event) override
+    {
+        QMainWindow::showEvent(event);
+
+        unordered_map<string, string> params = {{"difficulty", "Cursed"}, {"player_name", "Player"}};
+        InputHandler(UI_INPUT::StartGame, params);
+    }
+
 private:
     Ui::MainWindow *ui;
     GameController *m_gameController;

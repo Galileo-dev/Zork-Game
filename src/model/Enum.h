@@ -17,7 +17,8 @@ enum class Action
     Help,           // print help message (params: none)
     InvalidCommand, // invalid command (params: command)
     Look,           // look around the room (params: none)
-    ShowInventory   // show inventory (params: none)
+    ShowInventory,  // show inventory (params: none)
+    SolveRiddle     // solve a riddle (params: riddle_answer)
 
 };
 
@@ -32,8 +33,9 @@ enum Direction
 enum Difficulty
 {
     EASY,
-    MEDIUM,
-    HARD
+    NORMAL,
+    HARD,
+    CURSED
 };
 
 inline Difficulty stringToDifficulty(const std::string &str)
@@ -44,7 +46,7 @@ inline Difficulty stringToDifficulty(const std::string &str)
     }
     else if (str == "medium")
     {
-        return Difficulty::MEDIUM;
+        return Difficulty::NORMAL;
     }
     else if (str == "hard")
     {

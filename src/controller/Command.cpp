@@ -131,6 +131,11 @@ tuple<Action, std::unordered_map<std::string, std::string>> Command::parse()
 		params["player_name"] = currentCommand[1];
 		params["difficulty"] = currentCommand[2];
 	}
+	else if (commandWord.compare("solve") == 0)
+	{
+		action = Action::SolveRiddle;
+		params["riddle_answer"] = currentCommand[1];
+	}
 
 	// if (!command.validate())
 	// {

@@ -6,6 +6,7 @@
 #include <vector>
 #include "Item.h"
 #include "Enum.h"
+#include "Character.h"
 
 using namespace std;
 using std::vector;
@@ -42,12 +43,25 @@ public:
 	void setExits(IRoom *north, IRoom *east, IRoom *south, IRoom *west);
 	IRoom *getRoom(Direction direction);
 	string exitString();
+	void lockAllExits();
+	void unlockAllExits();
 
 private:
 	map<Direction, IRoom *> exits;
+	map<Direction, IRoom *> lockedExits;
 };
 
-class ItemRoom : public Room, public ExitRoom
+class StoryRoom
+{
+public:
+	string getStoryEvent();
+	void setStoryEvent(string storyEvent);
+
+private:
+	string storyEvent;
+};
+
+class ItemRoom : public Room, public ExitRoom, public StoryRoom
 {
 public:
 	ItemRoom(string description);
@@ -65,4 +79,18 @@ private:
 	string description;
 };
 
+class RiddleRoom : public ItemRoom
+{
+public:
+	bool isSolved = false;
+	RiddleRoom(string description);
+	string getRiddle();
+	void setRiddle(string riddle);
+	void setAnswer(string answer);
+	bool checkAnswer(string answer);
+
+private:
+	string riddle;
+	string answer;
+};
 #endif

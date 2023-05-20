@@ -51,6 +51,11 @@ string Item::getDisplayName()
     return displayName;
 }
 
+string Item::getDescription()
+{
+    return description;
+}
+
 string Item::getShortDescription()
 {
     return displayName + "(" + identifier + ")";
