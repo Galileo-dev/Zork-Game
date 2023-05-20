@@ -48,6 +48,11 @@ void GameController::guiUpdateGameModel(UI_INPUT ui_input, std::unordered_map<st
 
         action = Action::StartGame;
         break;
+    case UI_INPUT::PickupItem:
+        action = Action::PickupItem;
+        break;
+    case UI_INPUT::DropItem:
+        action = Action::DropItem;
 
     default:
         perror("Invalid UI_INPUT");

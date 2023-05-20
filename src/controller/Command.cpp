@@ -55,16 +55,25 @@ void Command::giveSuggestions(GameModel *gameModel)
 {
 	string commandWord = currentCommand[0];
 
-	Room *currentRoom = gameModel->getCurentRoom();
+	IRoom *currentRoom = gameModel->getCurentRoom();
+
 	if (commandWord.compare("go") == 0)
 	{
-		cout << "direction: ";
-		cout << currentRoom->exitString() << endl;
+		ExitRoom *exitRoom = dynamic_cast<ExitRoom *>(currentRoom);
+		if (exitRoom != nullptr)
+		{
+			cout << "direction: ";
+			cout << exitRoom->exitString() << endl;
+		}
+		else
+		{
+		}
 	}
 	else if (commandWord.compare("take") == 0)
 	{
+		ItemRoom *itemRoom = dynamic_cast<ItemRoom *>(currentRoom);
 		cout << "item: ";
-		currentRoom->displayItem();
+		itemRoom->displayItem();
 		cout << endl;
 	}
 }

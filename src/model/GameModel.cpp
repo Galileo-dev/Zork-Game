@@ -3,6 +3,7 @@
 GameModel::GameModel(QObject *parent) : QObject(parent)
 {
     m_gameState = new GameState();
+    emit gameModelChanged(this);
     cout << "GameModel::GameModel()" << endl;
 }
 
@@ -98,9 +99,20 @@ void GameModel::updateGameModel(Action action, std::unordered_map<std::string, s
             break;
         }
 
-        m_gameState->addReaction("You walk " + params["direction"]);
+        // cast current room to exit room
+        ExitRoom *exitRoom = dynamic_cast<ExitRoom *>(m_gameState->currentRoom);
+        if (exitRoom != nullptr)
+        {
+            if (exitRoom->getRoom(direction) == NULL)
+            {
+                m_gameState->addReaction("You walk " + params["direction"] + " into a wall... Ouch!");
+                break;
+            }
 
-        m_gameState->go(direction);
+            m_gameState->addReaction("You walk " + params["direction"]);
+            m_gameState->go(direction);
+            break;
+        }
         break;
     }
     case Action::PickupItem:
@@ -155,7 +167,7 @@ const GameState *GameModel::gameState()
     return m_gameState;
 }
 
-Room *GameModel::getCurentRoom()
+IRoom *GameModel::getCurentRoom()
 {
     return m_gameState->currentRoom;
 }

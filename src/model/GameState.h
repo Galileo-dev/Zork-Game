@@ -13,9 +13,9 @@ class GameState
 {
 private:
     Character *character = nullptr;
-    Room *currentRoom;
+    IRoom *currentRoom = nullptr;
     std::map<string, Item *> items;
-    std::map<string, Room *> rooms;
+    std::map<string, ItemRoom *> rooms;
     string reaction;
     bool isGameStarted = false;
     Difficulty difficulty;

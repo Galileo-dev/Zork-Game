@@ -42,7 +42,13 @@ MainWindow::MainWindow(GameController *gameController, QWidget *parent)
     connect(ui->westButton, &QPushButton::clicked, this, [=]()
             { InputHandler(UI_INPUT::Go, {{"direction", "west"}}); });
 
+    connect(ui->playerItemsList, &QListWidget::itemDoubleClicked, this, [=]()
+            { InputHandler(UI_INPUT::DropItem, {{"item_name", ui->playerItemsList->currentItem()->data(Qt::UserRole).toString().toStdString()}}); });
+    connect(ui->roomItemsList, &QListWidget::itemDoubleClicked, this, [=]()
+            { InputHandler(UI_INPUT::PickupItem, {{"item_name", ui->roomItemsList->currentItem()->data(Qt::UserRole).toString().toStdString()}}); });
+
     // ====================================================================================
+    emit m_gameModel->gameModelChanged(m_gameModel);
 }
 
 void MainWindow::InputHandler(UI_INPUT ui_input, std::unordered_map<std::string, std::string> params)
@@ -90,6 +96,31 @@ void MainWindow::updateGUIView(GameModel *gameModel)
     if (gameModel->getCharacter() != nullptr)
     {
         ui->stackedWidget->setCurrentIndex(1);
+
+        // update player inventory list
+        ui->playerItemsList->clear();
+        for (auto &item : gameModel->getCharacter()->getInventory())
+        {
+            QListWidgetItem *newItem = new QListWidgetItem;
+            newItem->setData(Qt::UserRole, QString::fromStdString(item->getIdentifier()));
+            newItem->setText(QString::fromStdString(item->getDisplayName()));
+            ui->playerItemsList->addItem(newItem);
+        }
+
+        // update room inventory list
+        ui->roomItemsList->clear();
+        // dynamic cast IRoom to ItemRoom
+        ItemRoom *itemRoom = dynamic_cast<ItemRoom *>(gameModel->getCurentRoom());
+        if (itemRoom != nullptr)
+        {
+            for (auto &item : itemRoom->getItems())
+            {
+                QListWidgetItem *newItem = new QListWidgetItem;
+                newItem->setData(Qt::UserRole, QString::fromStdString(item->getIdentifier()));
+                newItem->setText(QString::fromStdString(item->getDisplayName()));
+                ui->roomItemsList->addItem(newItem);
+            }
+        }
     }
 }
 

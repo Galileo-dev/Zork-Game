@@ -24,6 +24,7 @@ public:
 	string getShortDescription();
 	string getDisplayName();
 	string getLongDescription();
+	string getIdentifier();
 	float getWeight();
 	void setWeight(float weight);
 	void setValue(float value);

@@ -25,6 +25,11 @@ Item::Item(string _identifier, string _displayName, string _description, int _we
 //         weightGrams = WeightGrams;
 // }
 
+string Item::getIdentifier()
+{
+    return identifier;
+}
+
 void Item::setValue(float inValue)
 {
     if (inValue > 9999 || inValue < 0)

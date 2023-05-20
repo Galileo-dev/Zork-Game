@@ -57,29 +57,46 @@ void GameState::setup()
 void GameState::pickupItem(string itemName)
 {
     character->addInventory(items[itemName]);
-    currentRoom->removeItem(items[itemName]);
+    ItemRoom *itemRoom = dynamic_cast<ItemRoom *>(currentRoom);
+    if (itemRoom != nullptr)
+    {
+        itemRoom->removeItem(items[itemName]);
+    }
+    else
+    {
+        addReaction("This room does not contain any items.");
+    }
 }
 
 void GameState::dropItem(string itemName)
 {
     character->removeInventory(items[itemName]);
-    currentRoom->addItem(items[itemName]);
+
+    ItemRoom *itemRoom = dynamic_cast<ItemRoom *>(currentRoom);
+    if (itemRoom != nullptr)
+    {
+        itemRoom->addItem(items[itemName]);
+    }
+    else
+    {
+        addReaction("This room has special properties which cause any item on the ground to spontaniously combust and kill everything with 10 meters... you would'nt want that would you?");
+    }
 }
 
 void GameState::createRooms()
 {
     // Todo: read from file
-    Room *a, *b, *c, *d, *e, *f, *g, *h, *i;
+    ItemRoom *a, *b, *c, *d, *e, *f, *g, *h, *i;
 
-    a = new Room("a");
-    b = new Room("b");
-    c = new Room("c");
-    d = new Room("d");
-    e = new Room("e");
-    f = new Room("f");
-    g = new Room("g");
-    h = new Room("h");
-    i = new Room("i");
+    a = new ItemRoom("a");
+    b = new ItemRoom("b");
+    c = new ItemRoom("c");
+    d = new ItemRoom("d");
+    e = new ItemRoom("e");
+    f = new ItemRoom("f");
+    g = new ItemRoom("g");
+    h = new ItemRoom("h");
+    i = new ItemRoom("i");
 
     //          (N, E, S, W)
     a->setExits(f, b, d, c);
@@ -127,10 +144,10 @@ void GameState::createItems()
     // a key
     items["zork_key"] = new Item("zork_key", "Zork Key", "a key shaped from a tooth of a zork", 30, 100, true, false);
 
-    Room *a = this->rooms["a"];
+    ItemRoom *a = this->rooms["a"];
     a->addItem(items["zork_slayer"]);
 
-    // Room *b = &this->rooms["b"];
+    // ItemRoom *b = &this->rooms["b"];
     // b->addItem(new Item("xx", 3, 33));
     // b->addItem(new Item("yy", 4, 44));
 }
@@ -138,14 +155,20 @@ void GameState::createItems()
 void GameState::go(Direction direction)
 {
     // check if the room in the given direction is not null
-    if (currentRoom->getRoom(direction) != NULL)
+    // check if the current room is a ExitRoom
+    ExitRoom *exitRoom = dynamic_cast<ExitRoom *>(currentRoom);
+    if (exitRoom != nullptr)
     {
-        // set the current room to the room in the given direction
-        currentRoom = currentRoom->getRoom(direction);
-    }
-    else
-    {
-        cout << "there is no room in that direction" << endl;
+
+        if (exitRoom->getRoom(direction) != NULL)
+        {
+            // set the current room to the room in the given direction
+            currentRoom = exitRoom->getRoom(direction);
+        }
+        else
+        {
+            cout << "there is no room in that direction" << endl;
+        }
     }
 }
 

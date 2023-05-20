@@ -1,6 +1,17 @@
 #include "Room.h"
 #include <algorithm>
+
 Room::Room(string description)
+{
+    this->description = description;
+}
+
+void Room::setDescription(string description)
+{
+    this->description = description;
+}
+
+ItemRoom::ItemRoom(string description)
 {
     this->description = description;
 }
@@ -25,7 +36,7 @@ std::string toString(Direction direction)
     return "invalid_direction: this should never happen";
 }
 
-void Room::setExits(Room *north, Room *east, Room *south, Room *west)
+void ExitRoom::setExits(IRoom *north, IRoom *east, IRoom *south, IRoom *west)
 {
     if (north != NULL)
         exits[NORTH] = north;
@@ -46,33 +57,53 @@ string Room::longDescription()
 {
     string str = "";
     str += ("You are in room " + this->shortDescription()) + ".\n";
+    // str += ("Items in room: ") + displayItem() + "\n";
+    // str += ("Exits: ") + exitString() + "\n";
+    return str;
+}
+
+vector<Item *> ItemRoom::getItems()
+{
+    return itemsInRoom;
+}
+
+string const ItemRoom::shortDescription()
+{
+    return this->description;
+}
+
+string ItemRoom::longDescription()
+{
+    string str = "";
+    str += ("You are in room " + this->shortDescription()) + ".\n";
     str += ("Items in room: ") + displayItem() + "\n";
     str += ("Exits: ") + exitString() + "\n";
     return str;
 }
-string Room::exitString()
+
+string ExitRoom::exitString()
 {
     string returnString = "";
-    for (map<Direction, Room *>::iterator i = exits.begin(); i != exits.end(); i++)
+    for (map<Direction, IRoom *>::iterator i = exits.begin(); i != exits.end(); i++)
         // Loop through map
 
         returnString += " " + toString(i->first); // access the "first" element of the pair (direction as a string)
     return returnString;
 }
 
-Room *Room::getRoom(Direction direction)
+IRoom *ExitRoom::getRoom(Direction direction)
 {
-    map<Direction, Room *>::iterator next = exits.find(direction);
+    map<Direction, IRoom *>::iterator next = exits.find(direction);
     if (next == exits.end())
         return NULL;
     return next->second;
 }
-void Room::addItem(Item *inItem)
+void ItemRoom::addItem(Item *inItem)
 {
     itemsInRoom.push_back(inItem);
 }
 
-void Room::removeItem(Item *inItem)
+void ItemRoom::removeItem(Item *inItem)
 {
     // print the address of the item
     cout << "Address of item: " << inItem << endl;
@@ -89,7 +120,7 @@ void Room::removeItem(Item *inItem)
     }
 }
 
-string Room::displayItem()
+string ItemRoom::displayItem()
 {
     string tempString = "";
     int sizeItems = (itemsInRoom.size());
@@ -109,12 +140,12 @@ string Room::displayItem()
     return tempString;
 }
 
-int Room::numberOfItems()
+int ItemRoom::numberOfItems()
 {
     return itemsInRoom.size();
 }
 
-int Room::isItemInRoom(string inString)
+int ItemRoom::isItemInRoom(string inString)
 {
     int sizeItems = (itemsInRoom.size());
     if (itemsInRoom.size() < 1)
