@@ -1,23 +1,26 @@
-
+#ifndef CHARACTER_H_
 #define CHARACTER_H_
-#include "GameState.h"
 
-#include <string>
-using namespace std;
 #include <vector>
-using std::vector;
+#include "Item.h"
+
+using namespace std;
 
 class Character
 {
 private:
+	string name;
 	string description;
-	vector<string> itemsInCharacter;
+	vector<Item *> inventory;
 
 public:
-	void addItems(string Item);
-
-public:
-	Character(string description);
-	string shortDescription();
-	string longDescription();
+	Character() {}
+	string getInventoryDescription();
+	void addInventory(Item *Item);
+	void removeInventory(Item *Item);
+	vector<Item *> getInventory();
+	Character(string name, string description);
+	string getDescription();
 };
+
+#endif /*CHARACTER_H_*/

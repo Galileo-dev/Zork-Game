@@ -8,9 +8,11 @@ project(Game
         LANGUAGES CXX
         )
 
+# debug prints
+add_compile_definitions(DEBUG_LOG)
+
 # Set the vcpkg toolchain file
 set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake")
-
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON) 
 
@@ -30,10 +32,10 @@ set(CONTROLLER_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/controller")
 add_library(model
         ${MODEL_DIR}/Room.cpp
         ${MODEL_DIR}/Item.cpp
-        ${MODEL_DIR}/Command.cpp
-        ${MODEL_DIR}/CommandUtils.cpp
+        ${MODEL_DIR}/Character.cpp
         ${MODEL_DIR}/GameState.cpp
         ${MODEL_DIR}/GameModel.cpp
+        ${MODEL_DIR}/Utils.cpp
         
 )
 
@@ -42,7 +44,6 @@ target_include_directories(model PUBLIC ${MODEL_DIR})
 # Add the source files for the GUI view
 set(GUI_VIEW_DIR "${VIEW_DIR}/gui")
 set(GUI_VIEW_SRCS
-        ${GUI_VIEW_DIR}/GameGUI.cpp
         ${GUI_VIEW_DIR}/MainWindow.cpp
         ${GUI_VIEW_DIR}/MainWindow.ui
 )
@@ -50,27 +51,25 @@ add_library(gui_view ${GUI_VIEW_SRCS})
 target_include_directories(gui_view PUBLIC ${GUI_VIEW_DIR})
 target_link_libraries(gui_view PRIVATE model Qt6::Widgets)
 
-# Add the source files for the CLI view
-set(CLI_VIEW_DIR "${VIEW_DIR}/cli")
-add_library(cli_view ${CLI_VIEW_DIR}/GameCLI.cpp)
-target_include_directories(cli_view PUBLIC ${CLI_VIEW_DIR})
 
 
 # Add the source files for the controller
-add_library(controller ${CONTROLLER_DIR}/GameController.cpp)
+add_library(controller 
+        ${CONTROLLER_DIR}/GameController.cpp
+        ${CONTROLLER_DIR}/Command.cpp
+)
 target_include_directories(controller PUBLIC ${CONTROLLER_DIR})
 
 
 # Link the targets with necessary libraries
 target_link_libraries(gui_view PUBLIC model)
-target_link_libraries(cli_view PUBLIC model)
 target_link_libraries(controller PUBLIC model Qt6::Widgets)
 target_link_libraries(model PUBLIC Qt6::Widgets)
 
 
 # Create the executable target
 add_executable(game ${CONTROLLER_DIR}/GameController.cpp)
-target_link_libraries(game PUBLIC controller model gui_view cli_view )
+target_link_libraries(game PUBLIC controller model gui_view)
 
 
 

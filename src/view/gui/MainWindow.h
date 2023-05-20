@@ -23,9 +23,12 @@ private:
     Ui::MainWindow *ui;
     GameController *m_gameController;
     GameModel *m_gameModel;
+    string getTerminalOutput(GameModel *gameModel);
 
 private slots:
-    void InputHandler(Action action, std::unordered_map<std::string, std::string> params);
-    void updateView(GameState *gameState);
+    void InputHandler(UI_INPUT ui_input, std::unordered_map<std::string, std::string> params);
+    void updateGUIView(GameModel *gameModel);
+
+    void updateCLIView(GameModel *gameModel);
 };
 #endif // MAINWINDOW_H

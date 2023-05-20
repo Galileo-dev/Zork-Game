@@ -1,10 +1,17 @@
-#include "item.h"
+#include "Item.h"
+#include <iomanip>
+#include "Utils.h"
 
-Item::Item(string _identifier, string _description, int _weight, float _value, bool _isWeapon, bool _isQuestItem)
+Item::Item(string _identifier, string _displayName, string _description, int _weight, float _value, bool _isWeapon, bool _isQuestItem)
 {
+    identifier = _identifier;
+    displayName = _displayName;
     description = _description;
     weight = _weight;
     value = _value;
+    isWeapon = _isWeapon;
+    isQuestItem = _isQuestItem;
+
     /**weaponCheck(isWeapon);*/
 }
 
@@ -17,6 +24,11 @@ Item::Item(string _identifier, string _description, int _weight, float _value, b
 // what if we are very strong and can carry 10000 grams?
 //         weightGrams = WeightGrams;
 // }
+
+string Item::getIdentifier()
+{
+    return identifier;
+}
 
 void Item::setValue(float inValue)
 {
@@ -34,12 +46,18 @@ void Item::setValue(float inValue)
         cout << "Item is a weapon" ;
 }*/
 
+string Item::getDisplayName()
+{
+    return displayName;
+}
+
 string Item::getShortDescription()
 {
-    return description;
+    return displayName + "(" + identifier + ")";
 }
 
 string Item::getLongDescription()
 {
-    return " item(s), " + description + ".\n";
+    return displayName +
+           "(" + identifier + "):\n         description: " + description + "\n         weight: " + floatToString(weight) + "kg" + "\n         price: " + floatToString(value) + "zs"; // Use std::to_string() instead of to_string()
 }

@@ -1,4 +1,8 @@
+#ifndef GAMECONTROLLER_H
+#define GAMECONTROLLER_H
+
 #include <QObject>
+#include "Enum.h"
 #include "../model/GameModel.h"
 
 class GameController : public QObject
@@ -6,11 +10,14 @@ class GameController : public QObject
     Q_OBJECT
 public:
     GameController(QObject *parent = nullptr);
-    GameModel *GetGameModel() { return m_gameModel; }
+    GameModel *GetGameModel() { return &m_gameModel; }
 
 public slots:
-    void updateGameState(Action action, std::unordered_map<std::string, std::string> params);
+    void guiUpdateGameModel(UI_INPUT ui_input, std::unordered_map<std::string, std::string> params);
+    void cliUpdateGameModel(std::string Command);
 
 private:
-    GameModel *m_gameModel;
+    GameModel m_gameModel;
 };
+
+#endif // GAMECONTROLLER_H

@@ -4,32 +4,65 @@
 #include <map>
 #include <string>
 #include <vector>
-#include "item.h"
-#include "Direction.h"
+#include "Item.h"
+#include "Enum.h"
 
 using namespace std;
 using std::vector;
 
-class Room
+class IRoom
 {
+public:
+	// all rooms exits
+	virtual void setDescription(string description) = 0;
+	virtual string longDescription() = 0;
+	virtual string const shortDescription() = 0;
+	virtual ~IRoom() {}
+
+private:
+	string description();
+};
+
+class Room : public IRoom
+{
+public:
+	Room(){};
+	Room(string description);
+	void setDescription(string description) override;
+	string longDescription() override;
+	string const shortDescription() override;
 
 private:
 	string description;
-	map<Direction, Room *> exits;
-	vector<Item> itemsInRoom;
+};
 
+class ExitRoom
+{
 public:
+	void setExits(IRoom *north, IRoom *east, IRoom *south, IRoom *west);
+	IRoom *getRoom(Direction direction);
+	string exitString();
+
+private:
+	map<Direction, IRoom *> exits;
+};
+
+class ItemRoom : public Room, public ExitRoom
+{
+public:
+	ItemRoom(string description);
 	int numberOfItems();
-	Room(string description);
-	void setExits(Room *north, Room *east, Room *south, Room *west);
-	string const shortDescription();
-	string longDescription();
-	Room *getRoom(Direction direction);
 	void addItem(Item *inItem);
+	void removeItem(Item *inItem);
 	string displayItem();
 	int isItemInRoom(string inString);
-	string exitString();
-	void removeItemFromRoom(int location);
+	string longDescription();
+	string const shortDescription();
+	vector<Item *> getItems();
+
+private:
+	vector<Item *> itemsInRoom;
+	string description;
 };
 
 #endif

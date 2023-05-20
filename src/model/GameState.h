@@ -1,9 +1,9 @@
 #ifndef GameState_H_
 #define GameState_H_
 
-#include "Command.h"
-#include "item.h"
+#include "Item.h"
 #include "Room.h"
+#include "Character.h"
 #include <iostream>
 #include <string>
 using namespace std;
@@ -12,19 +12,37 @@ using namespace std;
 class GameState
 {
 private:
-    Room *currentRoom;
-    std::map<string, Item> items;
-    std::map<string, Room *> rooms;
+    Character *character = nullptr;
+    IRoom *currentRoom = nullptr;
+    std::map<string, Item *> items;
+    std::map<string, ItemRoom *> rooms;
+    string reaction;
+    bool isGameStarted = false;
+    Difficulty difficulty;
+    // friendship makes the dream work
+    friend class GameModel;
 
 public:
     GameState();
+    void setCharacter(Character *character);
+    void setDifficulty(Difficulty difficulty);
+
+    // not need as we have friends now!
+    // string getReaction();
+    // Character *getCharacter();
+    // Room *getCurentRoom();
+
+    void addReaction(string reaction);
+    void resetReaction();
     void go(Direction direction);
     void setup();
     void createRooms();
     void createItems();
+    void pickupItem(string itemName);
+    void dropItem(string itemName);
+    void setDifficulty();
     string getTerminalOutput(); // TODO: implement this
 
-    Room *getCurentRoom();
     vector<Item> *getAvailableItems();
 };
 

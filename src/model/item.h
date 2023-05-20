@@ -10,6 +10,7 @@ class Item
 {
 private:
 	string identifier;		// identifier
+	string displayName;		// this will be the name used in the inventory
 	string description;		// this wil be the short description used in the room
 	string longDescription; // this will be the long description used when the player looks at the item
 	float weight;
@@ -18,9 +19,12 @@ private:
 	bool isWeapon;
 	bool isQuestItem; // these cannot be dropped or stored in a chest... but have no weight
 public:
-	Item(string identifier, string description, int weight, float value, bool isWeapon, bool isQuestItem);
+	Item(){};
+	Item(string identifier, string displayName, string description, int weight, float value, bool isWeapon, bool isQuestItem);
 	string getShortDescription();
+	string getDisplayName();
 	string getLongDescription();
+	string getIdentifier();
 	float getWeight();
 	void setWeight(float weight);
 	void setValue(float value);

@@ -4,7 +4,7 @@
 #include <QObject>
 #include <unordered_map>
 #include "../model/GameState.h"
-#include "../model/Action.h"
+#include "../model/Enum.h"
 
 class GameModel : public QObject
 {
@@ -12,14 +12,18 @@ class GameModel : public QObject
 
 public:
     GameModel(QObject *parent = nullptr);
-    const GameState &gameState();
+    const GameState *gameState();
+    string getReaction();
+    Character *getCharacter();
+    IRoom *getCurentRoom();
+    void startGame(Character *character, Difficulty difficulty);
 signals:
-    void gameStateChanged(GameState *gameState);
+    void gameModelChanged(GameModel *gameModel);
 public slots:
-    void updateGameState(Action action, std::unordered_map<std::string, std::string> params);
+    void updateGameModel(Action action, std::unordered_map<std::string, std::string> params);
 
 private:
-    GameState m_gameState;
+    GameState *m_gameState;
 };
 
 #endif // GAME_MODEL_H

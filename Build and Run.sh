@@ -1,15 +1,17 @@
+#!/bin/sh
+
 # start by removing the old release
 rm -rf Release
 
 
 # go into the build directory
-cd build
+cd build || exit
 
 # run cmake to generate the build files
 cmake ..
 
 # run make to build the project
-make
+make -j8
 
 #  run
 # only run if the build succeeded

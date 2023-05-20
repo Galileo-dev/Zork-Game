@@ -1,12 +1,12 @@
-#include "../view/cli/GameCLI.h"
-#include "../view/gui/GameGUI.h"
 #include "../view/gui/MainWindow.h"
 #include "../model/GameState.h"
-
+#include "Command.h"
 #include <QApplication>
 
 #include <QStyleFactory>
 #include <QTimer>
+#include <tuple>
+#include "GameController.h"
 
 int main(int argc, char *argv[])
 {
@@ -21,11 +21,54 @@ int main(int argc, char *argv[])
 
 GameController::GameController(QObject *parent) : QObject(parent)
 {
-    // GUI Elements
-    m_gameModel = new GameModel();
 }
 
-void GameController::updateGameState(Action action, std::unordered_map<std::string, std::string> params)
+void GameController::guiUpdateGameModel(UI_INPUT ui_input, std::unordered_map<std::string, std::string> params)
 {
-    m_gameModel->updateGameState(action, params);
+
+    Action action;
+    switch (ui_input)
+    {
+    case UI_INPUT::CommandEntered:
+        cliUpdateGameModel(params["input"]);
+        return;
+        break;
+
+    case UI_INPUT::Go:
+        action = Action::Go;
+        break;
+    case UI_INPUT::Look:
+        action = Action::Look;
+        break;
+    case UI_INPUT::StartGame:
+        if (params["difficulty"] == "Normal (Recommended)")
+        {
+            params["difficulty"] = "Normal";
+        }
+
+        action = Action::StartGame;
+        break;
+    case UI_INPUT::PickupItem:
+        action = Action::PickupItem;
+        break;
+    case UI_INPUT::DropItem:
+        action = Action::DropItem;
+
+    default:
+        perror("Invalid UI_INPUT");
+        break;
+    }
+
+    m_gameModel.updateGameModel(action, params);
+}
+
+void GameController::cliUpdateGameModel(string commandString)
+{
+
+    Command command(commandString);
+    auto [pAction, pParams] = command.parse();
+    Action action = pAction;
+    unordered_map<string, string> params = pParams;
+
+    m_gameModel.updateGameModel(action, params);
 }
