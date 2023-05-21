@@ -1,12 +1,12 @@
 #include "MainWindow.h"
 #include "./ui_MainWindow.h"
 #include "../../controller/Enum.h"
-
 #include <iostream>
+
 MainWindow::MainWindow(GameController *gameController, QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
 {
-
+    // audio stuff
     player = new QMediaPlayer;
     audioOutput = new QAudioOutput;
     player->setAudioOutput(audioOutput);
@@ -14,9 +14,9 @@ MainWindow::MainWindow(GameController *gameController, QWidget *parent)
     audioOutput->setVolume(50);
     player->play();
 
+    // initialise ui
     m_gameController = gameController;
     m_gameModel = gameController->GetGameModel();
-
     ui->setupUi(this);
 
     // ========================== Connecting UI to GameController ==========================
@@ -50,22 +50,29 @@ MainWindow::MainWindow(GameController *gameController, QWidget *parent)
     connect(ui->westButton, &QPushButton::clicked, this, [=]()
             { InputHandler(UI_INPUT::Go, {{"direction", "west"}}); });
 
+    // drop an item
     connect(ui->playerItemsList, &QListWidget::itemDoubleClicked, this, [=]()
             { InputHandler(UI_INPUT::DropItem, {{"item_name", ui->playerItemsList->currentItem()->data(Qt::UserRole).toString().toStdString()}}); });
+    
+    //pickup an item
     connect(ui->roomItemsList, &QListWidget::itemDoubleClicked, this, [=]()
             { InputHandler(UI_INPUT::PickupItem, {{"item_name", ui->roomItemsList->currentItem()->data(Qt::UserRole).toString().toStdString()}}); });
 
+    //solve a riddle
     connect(ui->riddleAnswerInput, &QLineEdit::returnPressed, this, [=]()
             {
         std::string riddleAnswer = ui->riddleAnswerInput->text().toStdString();
         InputHandler(UI_INPUT::SolveRiddle, {{"riddle_answer", riddleAnswer}}); });
 
     // ====================================================================================
+
+    // model view controller pattern
     emit m_gameModel->gameModelChanged(m_gameModel);
 }
 
 void MainWindow::InputHandler(UI_INPUT ui_input, std::unordered_map<std::string, std::string> params)
 {
+// only for debugging. will only show when the DEBUG_LOG flag is defined in the CMakeLists.txt
 #ifdef DEBUG_LOG
     std::cout << "MainWindow::InputHandler()" << std::endl;
     std::cout << "input: " << static_cast<std::underlying_type<UI_INPUT>::type>(ui_input) << std::endl;
@@ -77,27 +84,8 @@ void MainWindow::InputHandler(UI_INPUT ui_input, std::unordered_map<std::string,
     }
 #endif
 
+    // handle ui input
     m_gameController->guiUpdateGameModel(ui_input, params);
-    // call signal
-
-    // show command ran in terminal
-    // switch (ui_input)
-    // {
-    // case UI_INPUT::ParseCommand:
-    //     ui->terminalBox->append(QString::fromStdString(">" + params["input"]));
-    //     break;
-
-    // case Action::StartGame:
-    //     ui->stackedWidget->setCurrentIndex(1);
-    //     break;
-    // default:
-    //     break;
-    // }
-
-    // clear input
-    // ui->terminalInput->clear();
-
-    // update game state
 }
 
 // in my mind this will be used to update the view
@@ -108,7 +96,7 @@ void MainWindow::updateGUIView(GameModel *gameModel)
     // if the character is created then we can start the game
     if (gameModel->getCharacter() != nullptr)
     {
-        // do character stuff in here
+        // do character & game settings stuff in here
         ui->stackedWidget->setCurrentIndex(1);
 
         // update player inventory list
@@ -116,6 +104,7 @@ void MainWindow::updateGUIView(GameModel *gameModel)
         for (auto &item : gameModel->getCharacter()->getInventory())
         {
             QListWidgetItem *newItem = new QListWidgetItem;
+            // we need to store item identifier as that is what the master list uses
             newItem->setData(Qt::UserRole, QString::fromStdString(item->getIdentifier()));
             newItem->setText(QString::fromStdString(item->getDisplayName()));
             ui->playerItemsList->addItem(newItem);
@@ -123,12 +112,14 @@ void MainWindow::updateGUIView(GameModel *gameModel)
 
         // update room inventory list
         ui->roomItemsList->clear();
-        // dynamic cast IRoom to ItemRoom
+
+        // if room is item room
         ItemRoom *itemRoom = dynamic_cast<ItemRoom *>(gameModel->getCurentRoom());
         if (itemRoom != nullptr)
         {
             for (auto &item : itemRoom->getItems())
             {
+                // show items in room on ui
                 QListWidgetItem *newItem = new QListWidgetItem;
                 newItem->setData(Qt::UserRole, QString::fromStdString(item->getIdentifier()));
                 newItem->setText(QString::fromStdString(item->getDisplayName()));
@@ -138,8 +129,8 @@ void MainWindow::updateGUIView(GameModel *gameModel)
     }
 
     // disable buttons if there is no room in that direction
-    // check it has exits
     ExitRoom *exitRoom = dynamic_cast<ExitRoom *>(gameModel->getCurentRoom());
+    // check it has exits
     if (exitRoom == nullptr)
     {
         ui->northButton->setEnabled(false);
@@ -162,15 +153,15 @@ void MainWindow::updateGUIView(GameModel *gameModel)
 
 string MainWindow::getTerminalOutput(GameModel *gameModel)
 {
-    // build a string
     string output = "";
-    // output += "You are in room " + m_gameState.getCurentRoom()->shortDescription() + "\n";
+    // reaction system is the same for both gui and cli making it agnostic to the type of view
     output += gameModel->getReaction();
     return output;
 }
 
 void MainWindow::updateCLIView(GameModel *gameModel)
 {
+    // just add the terminal output to the terminal box
     std::string terminalOutput = getTerminalOutput(gameModel);
     ui->terminalBox->append(QString::fromStdString(terminalOutput));
 }

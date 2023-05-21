@@ -8,20 +8,24 @@ using namespace std;
 
 class Character
 {
-private:
-		string description;
-	vector<Item *> inventory;
 
 public:
 	Character() {}
+	Character(string name, string description);
+
+	// inventory system
 	string getInventoryDescription();
 	void addInventory(Item *Item);
-	void removeInventory(Item *Item);
 	vector<Item *> getInventory();
-	Character(string name, string description);
+	void removeInventory(Item *Item);
 	string getDescription();
 
+	// told you I have friends
 	friend class GameModel;
+
+private:
+	string description;
+	vector<Item *> inventory;
 	string name;
 };
 

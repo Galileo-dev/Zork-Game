@@ -7,7 +7,6 @@ Character::Character(string name, string description)
   this->description = description;
 }
 
-// Todo(): find a way to delete the item after adding to inventory
 void Character::addInventory(Item *item)
 {
   inventory.push_back(item);
