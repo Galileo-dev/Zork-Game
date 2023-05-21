@@ -149,6 +149,7 @@ void GameModel::updateGameModel(Action action, std::unordered_map<std::string, s
 
                 if (!riddleRoom->isSolved)
                 {
+                    m_gameState->addReaction("As you enter the room all the exits disappear and a riddle appears on the wall.");
                     m_gameState->addReaction(riddleRoom->getRiddle());
                     riddleRoom->lockAllExits();
                     // lock all exits

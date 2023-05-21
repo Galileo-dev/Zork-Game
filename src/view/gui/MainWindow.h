@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QAudioOutput>
+#include <QMediaPlayer>
 
 QT_BEGIN_NAMESPACE
 namespace Ui
@@ -33,6 +35,8 @@ private:
     GameController *m_gameController;
     GameModel *m_gameModel;
     string getTerminalOutput(GameModel *gameModel);
+    QMediaPlayer *player;
+    QAudioOutput *audioOutput;
 
 private slots:
     void InputHandler(UI_INPUT ui_input, std::unordered_map<std::string, std::string> params);

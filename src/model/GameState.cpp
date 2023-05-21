@@ -62,7 +62,7 @@ void GameState::dropItem(string itemName)
     if (itemRoom != nullptr)
     {
         itemRoom->addItem(items[itemName]);
-        addReaction("You drop " + items[itemName]->getDisplayName() + "... " + "why did you drop that??? it's not like there is a weight system implemented. hey you pick that back up right now!");
+        addReaction("You drop " + items[itemName]->getDisplayName() + "... " + "<Dev>: why did you drop that??? it's not like there is a weight system implemented. hey you pick that back up right now!");
     }
     else
     {
@@ -114,14 +114,14 @@ void GameState::createRooms()
     storyEvent += "<Dev>: you are about to take your final test to become a Zork master. you must complete a dungeon \n";
     storyEvent += "<Dev>: that's right a dungeon. of riddles!!! \n ";
     storyEvent += "<Dev>: You must complete two branches. one of friendship and compassion (east). the other of dread and misery (west)\n";
-    storyEvent += "<Dev>: You have 10 minutes to two branches starting......... now! \n";
+    storyEvent += "<Dev>: You have 10 minutes to complete both branches starting......... now! \n";
     c->setStoryEvent(storyEvent);
     // branch 1
 
     // =============== EXITS ===============
 
     // friendship and compassion
-    d->setExits(NULL, e, NULL, NULL);
+    d->setExits(NULL, e, NULL, c);
     e->setExits(NULL, f, NULL, d);
     f->setExits(NULL, NULL, NULL, e);
 
@@ -136,10 +136,10 @@ void GameState::createRooms()
     storyEvent += "<Dev>: Turns out your a c++ programmer after all?\n";
     storyEvent += "<Dev>: These will get progressively harder!\n";
     e->setStoryEvent(storyEvent);
-    e->setRiddle(R"(I'm there in laughter, through every cheer,\n
-                In moments of sorrow, I'll be near.\n
-                An intangible force that holds hearts tight,\n
-                In this puzzle of life, I am the light.\n
+    e->setRiddle(R"(I'm there in laughter, through every cheer,
+                In moments of sorrow, I'll be near.
+                An intangible force that holds hearts tight,
+                In this puzzle of life, I am the light.
                 Who am I?)");
 
     e->setAnswer("friendship");
@@ -148,14 +148,14 @@ void GameState::createRooms()
     storyEvent += "<Dev>: so you're not so heartless after all?\n";
     storyEvent += "<Dev>: This next one will be a really tough!\n";
     f->setStoryEvent(storyEvent);
-    f->setRiddle(R"(A tender touch, a caring gaze,\n
-                In hearts it blooms, in countless ways.\n
-                It lifts the weary, heals the soul,\n
-                What is this gift that makes us whole?\n)");
+    f->setRiddle(R"(A tender touch, a caring gaze,
+                In hearts it blooms, in countless ways.
+                It lifts the weary, heals the soul,
+                What is this gift that makes us whole?)");
     f->setAnswer("compassion");
 
     // dread and misery
-    g->setExits(NULL, NULL, NULL, h);
+    g->setExits(NULL, c, NULL, h);
     h->setExits(NULL, g, NULL, i);
     i->setExits(NULL, h, NULL, NULL);
 
@@ -213,6 +213,12 @@ void GameState::go(Direction direction)
 
         if (exitRoom->getRoom(direction) != NULL)
         {
+            // win condition
+            if (exitRoom == rooms["c"])
+            {
+                checkGameCompleted();
+            }
+
             // set the current room to the room in the given direction
             currentRoom = exitRoom->getRoom(direction);
         }
@@ -297,7 +303,7 @@ void GameState::checkGameCompleted()
     {
         addReaction("GAME-SYSTEM: you have completed the game");
         addReaction("GAME-SYSTEM: you have been given a reward for completing the game");
-        character->addItem(items["zork_cake"]);
+        character->addInventory(items["zork_cake"]);
         addReaction("<Dev>: eww, why would anyone want to eat that?");
     }
 }

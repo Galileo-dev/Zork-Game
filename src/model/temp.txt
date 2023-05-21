@@ -1,0 +1,38 @@
+ // GameState *m_gameState = gameModel->getGameState();
+    // if (action == Action::StartGame)
+    // {
+    //     string output = "Welcome to the game, " + params["player_name"] + "!\n"
+    //                                                                       "You are " +
+    //                     m_gameState->character->getDescription() + "\n"
+    //                                                                "You are playing on " +
+    //                     params["difficulty"] + " difficulty...\n"
+    //                                            "<Dev>: Hello there " +
+    //                     m_gameState->character->name + " I'm the developer of this \"game\"\n";
+
+    //     if (m_gameState->difficulty == Difficulty::EASY)
+    //     {
+    //         output += "<Dev>: Hey why are you playing on easy mode? if you are this bad at games you should just quit now. alt+f4 should do the trick\n";
+    //     }
+    //     else if (m_gameState->difficulty == Difficulty::NORMAL)
+    //     {
+    //         output += "<Dev>: Why are you're playing on Normal, normal is for people with bad tempers, you should be play on hard or cursed\n";
+    //     }
+    //     else if (m_gameState->difficulty == Difficulty::HARD)
+    //     {
+    //         output += "<Dev>: Good your playing on hard. despite what I told you in the menu this is the recommended difficulty. *wink wink*\n";
+    //     }
+    //     else if (m_gameState->difficulty == Difficulty::CURSED)
+    //     {
+    //         output += "<Dev>: AHHHHhhh whyyy are you playing on cursed! this will allow for the optimal experience of wanting to turn your laptop into a frisbee. or for the mac lovers out their turn you mac into an Ipad.\n";
+    //     }
+
+    //     output += "<Dev>: Alright, moving on...\n"
+    //               "<Dev>: Welcome to the tutorial. I will be your friend for this section of the game. you may leave at any time by pressing alt+f4. I will be sad but I will understand.\n"
+    //               "<Dev>: To start off you can move around the map by typing go north, go south, go east, or go west. you can also type look to see what is in the room you are in.\n";
+
+    //     m_gameState->addReaction(output);
+    // }
+    // else
+    // {
+    //     return "";
+    // }

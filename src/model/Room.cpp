@@ -198,7 +198,7 @@ RiddleRoom::RiddleRoom(string description) : ItemRoom(description)
 
 string RiddleRoom::getRiddle()
 {
-    return riddle;
+    return "RIDDLE-SYSTEM: dispensing riddle.... \n RIDDLE-SYSTEM: " + riddle;
 }
 
 void RiddleRoom::setRiddle(string riddle)

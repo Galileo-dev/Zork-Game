@@ -15,6 +15,7 @@ enum class UI_INPUT
     DropItem,       // drop an item (params: item_name)
     Go,             // go in a direction (params: direction)
     UseItem,        // use an item. i.e. consume/activate (params: item_name)
+    SolveRiddle,
     Attack,
     Quit,
     Help,

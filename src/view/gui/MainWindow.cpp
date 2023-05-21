@@ -6,6 +6,14 @@
 MainWindow::MainWindow(GameController *gameController, QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
 {
+
+    player = new QMediaPlayer;
+    audioOutput = new QAudioOutput;
+    player->setAudioOutput(audioOutput);
+    player->setSource(QUrl::fromLocalFile(QCoreApplication::applicationDirPath() + "/Atomic Heart OST.mp3"));
+    audioOutput->setVolume(50);
+    player->play();
+
     m_gameController = gameController;
     m_gameModel = gameController->GetGameModel();
 
@@ -46,6 +54,11 @@ MainWindow::MainWindow(GameController *gameController, QWidget *parent)
             { InputHandler(UI_INPUT::DropItem, {{"item_name", ui->playerItemsList->currentItem()->data(Qt::UserRole).toString().toStdString()}}); });
     connect(ui->roomItemsList, &QListWidget::itemDoubleClicked, this, [=]()
             { InputHandler(UI_INPUT::PickupItem, {{"item_name", ui->roomItemsList->currentItem()->data(Qt::UserRole).toString().toStdString()}}); });
+
+    connect(ui->riddleAnswerInput, &QLineEdit::returnPressed, this, [=]()
+            {
+        std::string riddleAnswer = ui->riddleAnswerInput->text().toStdString();
+        InputHandler(UI_INPUT::SolveRiddle, {{"riddle_answer", riddleAnswer}}); });
 
     // ====================================================================================
     emit m_gameModel->gameModelChanged(m_gameModel);

@@ -21,7 +21,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # set(CMAKE_MODULE_LINKER_FLAGS_INIT "-fuse-ld=lld")
 # set(CMAKE_SHARED_LINKER_FLAGS_INIT "-fuse-ld=lld")
 
-find_package(Qt6 REQUIRED COMPONENTS Widgets)
+find_package(Qt6 REQUIRED COMPONENTS Widgets Multimedia)
 qt_standard_project_setup()
 
 # Set the source directories for each component
@@ -50,7 +50,7 @@ set(GUI_VIEW_SRCS
 )
 add_library(gui_view ${GUI_VIEW_SRCS})
 target_include_directories(gui_view PUBLIC ${GUI_VIEW_DIR})
-target_link_libraries(gui_view PRIVATE model Qt6::Widgets)
+target_link_libraries(gui_view PRIVATE model Qt6::Widgets Qt6::Multimedia)
 
 
 
@@ -63,8 +63,8 @@ target_include_directories(controller PUBLIC ${CONTROLLER_DIR})
 
 # Link the targets with necessary libraries
 target_link_libraries(gui_view PUBLIC model)
-target_link_libraries(controller PUBLIC model Qt6::Widgets)
-target_link_libraries(model PUBLIC Qt6::Widgets)
+target_link_libraries(controller PUBLIC model Qt6::Widgets Qt6::Multimedia)
+target_link_libraries(model PUBLIC Qt6::Widgets Qt6::Multimedia)
 
 
 # Create the executable target

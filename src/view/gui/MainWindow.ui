@@ -121,102 +121,125 @@
               <number>1</number>
              </property>
              <widget class="QWidget" name="introduction">
-              <widget class="QPushButton" name="startButton">
-               <property name="geometry">
-                <rect>
-                 <x>330</x>
-                 <y>400</y>
-                 <width>100</width>
-                 <height>32</height>
-                </rect>
-               </property>
-               <property name="text">
-                <string>Start</string>
-               </property>
-              </widget>
-              <widget class="QWidget" name="layoutWidget">
-               <property name="geometry">
-                <rect>
-                 <x>210</x>
-                 <y>30</y>
-                 <width>381</width>
-                 <height>114</height>
-                </rect>
-               </property>
-               <layout class="QVBoxLayout" name="verticalLayout_4">
-                <item>
-                 <layout class="QVBoxLayout" name="verticalLayout_2">
-                  <item>
-                   <widget class="QLabel" name="label">
-                    <property name="autoFillBackground">
-                     <bool>false</bool>
-                    </property>
-                    <property name="text">
-                     <string>Select Mode</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QComboBox" name="modeSelectionInput">
-                    <property name="editable">
-                     <bool>false</bool>
-                    </property>
-                    <property name="duplicatesEnabled">
-                     <bool>false</bool>
-                    </property>
-                    <property name="frame">
-                     <bool>true</bool>
-                    </property>
-                    <property name="modelColumn">
-                     <number>0</number>
-                    </property>
-                    <item>
-                     <property name="text">
-                      <string>Normal (Recommended)</string>
+              <layout class="QVBoxLayout" name="verticalLayout_4" stretch="3,1,1">
+               <item>
+                <layout class="QVBoxLayout" name="verticalLayout_3">
+                 <item>
+                  <layout class="QVBoxLayout" name="verticalLayout_2">
+                   <item>
+                    <spacer name="verticalSpacer_2">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
                      </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>Easy</string>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>40</height>
+                      </size>
                      </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>Hard</string>
+                    </spacer>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="label">
+                     <property name="autoFillBackground">
+                      <bool>false</bool>
                      </property>
-                    </item>
-                    <item>
                      <property name="text">
-                      <string>Cursed</string>
+                      <string>Select Mode</string>
                      </property>
-                    </item>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-                <item>
-                 <layout class="QVBoxLayout" name="verticalLayout_3">
-                  <item>
-                   <widget class="QLabel" name="label_2">
-                    <property name="autoFillBackground">
-                     <bool>false</bool>
-                    </property>
-                    <property name="text">
-                     <string>Character Name</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QLineEdit" name="characterNameInput"/>
-                  </item>
-                 </layout>
-                </item>
-               </layout>
-              </widget>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QComboBox" name="modeSelectionInput">
+                     <property name="editable">
+                      <bool>false</bool>
+                     </property>
+                     <property name="duplicatesEnabled">
+                      <bool>false</bool>
+                     </property>
+                     <property name="frame">
+                      <bool>true</bool>
+                     </property>
+                     <property name="modelColumn">
+                      <number>0</number>
+                     </property>
+                     <item>
+                      <property name="text">
+                       <string>Normal (Recommended)</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Easy</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Hard</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Cursed</string>
+                      </property>
+                     </item>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="label_2">
+                   <property name="autoFillBackground">
+                    <bool>false</bool>
+                   </property>
+                   <property name="text">
+                    <string>Character Name</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="characterNameInput"/>
+                 </item>
+                 <item>
+                  <spacer name="verticalSpacer">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <widget class="QPushButton" name="startButton">
+                 <property name="text">
+                  <string>Start</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="verticalSpacer_3">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
              </widget>
              <widget class="QWidget" name="gameAdventure">
-              <layout class="QGridLayout" name="gridLayout_5">
-               <item row="0" column="0">
+              <layout class="QVBoxLayout" name="verticalLayout_5">
+               <item>
                 <layout class="QVBoxLayout" name="verticalLayout_9">
                  <item>
                   <widget class="QTextBrowser" name="outputText">
@@ -234,7 +257,52 @@ li.checked::marker { content: &quot;\2612&quot;; }
                  </item>
                 </layout>
                </item>
-               <item row="7" column="0">
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,3,1">
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <spacer name="horizontalSpacer_8">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item>
+                  <widget class="QGroupBox" name="groupBox">
+                   <property name="title">
+                    <string>Riddle Answer (press enter to submit)</string>
+                   </property>
+                   <layout class="QGridLayout" name="gridLayout_2">
+                    <item row="0" column="0">
+                     <widget class="QLineEdit" name="riddleAnswerInput"/>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer_9">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </item>
+               <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="0,0,0">
                  <item>
                   <widget class="QGroupBox" name="InventoryContainer">

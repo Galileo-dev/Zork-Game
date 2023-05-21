@@ -53,6 +53,9 @@ void GameController::guiUpdateGameModel(UI_INPUT ui_input, std::unordered_map<st
         break;
     case UI_INPUT::DropItem:
         action = Action::DropItem;
+    case UI_INPUT::SolveRiddle:
+        action = Action::SolveRiddle;
+        break;
 
     default:
         perror("Invalid UI_INPUT");
